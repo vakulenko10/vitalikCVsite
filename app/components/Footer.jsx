@@ -13,7 +13,7 @@ const Footer = () => {
                     
                 </div>
                 <div className='text-center md:text-end'>
-                    <h5>CV website</h5>
+                    <h5>that is an attachment to CV</h5>
                     <h6>made by Vitalik Vakulenko </h6>
                 </div>
             </div>
