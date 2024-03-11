@@ -27,7 +27,8 @@ const Gallery = ({ sectionData, sectionName }) => {
 
   return (
     <>
-       <h1 className='text-center capitalize text-white z-10'>{sectionName}</h1>
+       <motion.h1 initial={{ opacity: 0, x: -200 }}
+        whileInView={{opacity: 1, x: 0 }}  transition={{ duration: 0.2 }} className='text-center text-white capitalize'>{sectionName}</motion.h1>
 
     <motion.div className='py-[10px] flex flex-col md:flex-row flex-wrap justify-start items-center h-full place-items-center' ref={ref} initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}}>
       {sectionData.map((sectionItem, index) => (

@@ -11,11 +11,11 @@ const DefaultRenderComponent = ({ sectionData }) => {
     
     return (
         <div className='h-full flex flex-col justify-between items-center md:gap-10 md:grid md:grid-cols-2 md:items-center md:justify-center'>
-            <motion.div className=' justify-self-end flex order-2 md:order-1 justify-center items-center md:justify-end md:items-center relative w-2/3 h-3/4  overflow-hidden' whileHover={{scale: 1.05}} transition={{duration: 0.2, ease: easeInOut}} initial={{ opacity: 0, y: 100 }}
+            <motion.div className=' justify-self-end flex order-2 md:order-1 justify-center items-center md:justify-end md:items-center relative w-2/3 h-3/4 rounded-[30px] md:rounded-[100px] overflow-hidden' whileHover={{scale: 1.05}} transition={{duration: 0.2, ease: easeInOut}} initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}>
                 {/* Render image on the right side */}
                 {activeItemProps.includes('imageURL') && (
-                    <img src={activeItem['imageURL']} className='object-contain' alt="Image" />
+                    <img src={activeItem['imageURL']} className='object-contain rounded' alt="Image" />
                 )}
             </motion.div>
             <motion.div  initial={{ opacity: 0, x: -100 }}
