@@ -3,7 +3,7 @@ import React from 'react';
 const ListOfItems = ({ sectionData , sectionName}) => {
   return (
     <div className='flex flex-col justify-center items-center'>
-    <h1 className='text-center capitalize'>{sectionName}</h1>
+    <h1 className='text-center text-white capitalize'>{sectionName}</h1>
     
       <div className='pt-[20px] gap-5 md:pt-[100px] flex w-full min-[500px]:w-4/5 md:w-3/5 items-baseline justify-center md:items-baseline md:gap-8 flex-wrap'>
       {sectionData.map((item, index) => (
