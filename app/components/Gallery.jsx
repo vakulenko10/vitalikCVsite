@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { renderTextByProperty } from './mainconsts';
 import Link from 'next/link';
 
-const Gallery = ({ sectionData }) => {
+const Gallery = ({ sectionData, sectionName }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isPortfolioItemOpened, setIsPortfolioItemOpened] = useState(false);
   const ref = useRef(null);
@@ -26,6 +26,9 @@ const Gallery = ({ sectionData }) => {
   }, [isInView])
 
   return (
+    <>
+       <h1 className='text-center capitalize text-white z-10'>{sectionName}</h1>
+
     <motion.div className='py-[10px] flex flex-col md:flex-row flex-wrap justify-start items-center h-full place-items-center' ref={ref} initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}}>
       {sectionData.map((sectionItem, index) => (
         <motion.div
@@ -65,7 +68,7 @@ const Gallery = ({ sectionData }) => {
           )}
         </motion.div>
       ))}
-    </motion.div>
+    </motion.div></>
   );
 };
 

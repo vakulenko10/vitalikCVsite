@@ -6,8 +6,11 @@ import DefaultRenderComponent from './DefaultRenderComponent';
 import Carousel from './Carousel';
 import Gallery from './Gallery';
 import Accordion from './Accordion';
-import { SectionToRenderType, collectionsToSections, sectionClasses } from './mainconsts';
+import ListOfItems from './ListOfItems'
+import { SectionToRenderType, Sections, collectionsToSections, sectionClasses } from './mainconsts';
 import Loader from './Loader'
+import Socials from './Socials'
+
 const filterDataByLanguage = (collectionData, language) => {
   const unwantedProps = ["_id", "updatedAt", "createdAt", "__v"];
 
@@ -27,7 +30,7 @@ const filterDataByLanguage = (collectionData, language) => {
 
 
 
-const Section = ({ collectionName, renderType, className }) => {
+const Section = ({ collectionName, renderType, className}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -63,11 +66,13 @@ const Section = ({ collectionName, renderType, className }) => {
         case "default":
           return <DefaultRenderComponent sectionData={data} />;
         case "carousel":
-          return <Carousel sectionData={data} />;
+          return <Carousel sectionData={data} sectionName={collectionsToSections[collectionName]} />;
         case "gallery":
-          return <Gallery sectionData={data} />;
+          return <Gallery sectionData={data} sectionName={collectionsToSections[collectionName]} />;
         case "accordion":
-          return <Accordion sectionData={data} />;
+          return <Accordion sectionData={data} sectionName={collectionsToSections[collectionName]} />;
+        case "list":
+          return <ListOfItems sectionData={data} sectionName={collectionsToSections[collectionName]} />;
         default:
           return null;
       }
@@ -85,10 +90,11 @@ const Section = ({ collectionName, renderType, className }) => {
   }
   else{
     return (
-    <div id={collectionsToSections[collectionName]} className={`${collectionsToSections[collectionName]} min-h-[100vh] md:min-h-0 section w-full  overflow-hidden box-border ${className} ${sectionClasses[collectionName]} `}>
+    <div id={collectionsToSections[collectionName]} className={`${collectionsToSections[collectionName]} min-h-[100vh] section w-full  overflow-hidden box-border pt-[50px] md:pt-[100px]  ${className} ${sectionClasses[collectionName]} `}>
       <Container >
         {/* {JSON.stringify(data)} */}
         {RenderTypeToComponent(renderType, data)}
+        <Socials/>
       </Container>
     </div>
   );}

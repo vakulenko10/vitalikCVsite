@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { renderTextByProperty } from './mainconsts';
 import { FaArrowRight, FaCircle } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
-const Carousel = ({ sectionData }) => {
+const Carousel = ({ sectionData, sectionName }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const dataLength = sectionData.length;
   const ref = useRef(null)
@@ -23,6 +23,7 @@ const Carousel = ({ sectionData }) => {
 
   return (
     <div className='w-full h-full relative '>
+      <h1 className='text-center capitalize absolute left-1/2 transform -translate-x-1/2 text-white z-10'>{sectionName}</h1>
       <AnimatePresence mode='wait'>
         <motion.div
           className='relative h-full'

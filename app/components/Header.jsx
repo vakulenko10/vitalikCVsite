@@ -22,10 +22,10 @@ const Header = () => {
     setLanguage(lang);
   }
   return (
-    <header className={` w-full  backdrop-blur-[2px] text-white z-[999] ${isSmallHeaderActive?' md:absolute fixed':'absolute'} `}>
+    <header className={` w-full backdrop-contrast-75 backdrop-blur-[2px] text-white z-[999] fixed `}>
       <Container>
         <nav className="px-4 lg:px-6 py-2.5 flex justify-between items-center">
-          <h5 className={`text-2xl md:visible  `}>vitalik</h5>
+          <h5 className={`text-2xl md:visible  `}>VVI</h5>
           <LinksContainer isSmallHeaderActive={isSmallHeaderActive} setIsSmallHeaderActive={setIsSmallHeaderActive} />
           
           <HeaderBurger classes={''} handleBurgerChange={handleBurgerChange} isSmallHeaderActive={isSmallHeaderActive}/>

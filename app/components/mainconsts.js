@@ -4,28 +4,33 @@ export const SectionIndex = {
     "helloitems": 0,
     "aboutmeitems":1,
     "myportfolioitems": 2,
-    "mynewsitems": 3
+    "skillitems": 3,
+    "mynewsitems": 4
 }
 export const collectionsToSections = {
     "helloitems": "welcome",
     "aboutmeitems":"about",
     "myportfolioitems":"Portfolio",
-    "mynewsitems":"someNews"
+    "skillitems": 'skills',
+    "mynewsitems":"someNews",
+    
 }
 export const Sections = Object.values(collectionsToSections);
 export const sectionClasses = {
-    "helloitems": ` md:h-[100vh] bg-slate-500 pb-[10px] md:pb-0  bg-cover pt-[50px] md:pt-0 `,
+    "helloitems": ` md:h-[100vh] bg-slate-500 pb-[10px] md:pb-0  bg-cover  `,
     "myportfolioitems": 'bg-slate-300',
-    "aboutmeitems": 'md:h-[100vh] bg-slate-400 py-[10px] ',
-    "mynewsitems": 'md:h-[100vh] bg-slate-200 py-[10px] text-black'
-  
+    "aboutmeitems": ' md:h-[100vh] bg-slate-400 py-[10px] ',
+    "skillitems": ' bg-slate-300 min-h-[100vh] relative',
+    "mynewsitems": 'md:h-[100vh] bg-slate-300 py-[10px] text-black',
+
   }
 
 export const SectionToRenderType = {
     "helloitems": "default",
     "aboutmeitems":"carousel",
     "myportfolioitems":"gallery",
-    "mynewsitems":"carousel"
+    "mynewsitems":"carousel",
+    "skillitems":"list"
 }
 export function renderTextByProperty(property, text, key, className) {
     if (property.includes('Title')) {
