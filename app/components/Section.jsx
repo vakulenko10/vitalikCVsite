@@ -82,7 +82,7 @@ const Section = ({ collectionName, renderType, className}) => {
   if(loading){
     return(
       <div id={collectionsToSections[collectionName]} className={`${collectionsToSections[collectionName]} section w-full h-[100vh] overflow-hidden box-border ${className} ${sectionClasses[collectionName]}`}>
-        <Container classes={`flex justify-center items-center h-full relative`}>
+        <Container classes={`flex justify-center items-center h-full relative  `}>
         <Loader />
         </Container>
       </div>

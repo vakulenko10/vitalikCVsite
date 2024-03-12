@@ -26,7 +26,7 @@ const Gallery = ({ sectionData }) => {
   }, [isInView])
 
   return (
-    <motion.div className='py-[10px] flex flex-col md:flex-row flex-wrap justify-start items-center h-full place-items-center' ref={ref} initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}}>
+    <motion.div className=' pb-[100px] flex flex-col md:flex-row flex-wrap justify-start items-center h-full place-items-center' ref={ref} initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}}>
       {sectionData.map((sectionItem, index) => (
         <motion.div
           key={index}
