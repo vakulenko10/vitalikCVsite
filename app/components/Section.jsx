@@ -90,12 +90,14 @@ const Section = ({ collectionName, renderType, className}) => {
   }
   else{
     return (
-    <div id={collectionsToSections[collectionName]} className={`${collectionsToSections[collectionName]} min-h-[100vh] section w-full  overflow-hidden box-border pt-[50px] md:pt-[100px]  ${className} ${sectionClasses[collectionName]} `}>
+    <div id={collectionsToSections[collectionName]} className={`${collectionsToSections[collectionName]} min-h-[100vh] section w-full  overflow-hidden box-border pt-[50px] ${className} ${sectionClasses[collectionName]} `}>
       <Container >
         {/* {JSON.stringify(data)} */}
+        {collectionsToSections[collectionName]!='welcome'?<h1 className='text-center capitalize text-white z-10'>{collectionsToSections[collectionName]}</h1>:null}
         {RenderTypeToComponent(renderType, data)}
         <Socials/>
       </Container>
+      
     </div>
   );}
 };

@@ -23,15 +23,15 @@ const LinksContainer = ({isSmallHeaderActive, setIsSmallHeaderActive}) => {
     }
     // console.log("Sections:", Sections)
   return (
-    <div className={`justify-center items-center md:flex gap-1 ${isSmallHeaderActive?`md:relative fixed inset-x-0 inset-y-0 pt-10 p-3 bg-[#000000d5]  h-screen md:h-auto md:block md:bg-inherit md:p-0`:`hidden`} `}>
+    <div className={`justify-center items-center md:flex gap-1 ${isSmallHeaderActive?`md:relative fixed inset-x-0 inset-y-0 pt-10 p-3 bg-[#949494]  h-screen md:h-auto md:block md:bg-inherit md:p-0`:`hidden`} `}>
         <ul className={`md:bg-transparent ${isSmallHeaderActive?`flex flex-col md:flex md:flex-row md:p-0 md:gap-[10px] md:bg-transparent `:`md:flex md:gap-[10px]`} `}>
 
             {Sections.map((link, index)=> <Link key={index} onClick={handleLinkClick} href={`#${link}`} className={`transition duration-200 ease-linear ${isSmallHeaderActive?`md:bg-transparent p-5 hover:bg-[#fafafa9e] md:hover:bg-transparent md:hover:text-[#ffffffec] md:p-0 `:`md:hover:text-[#ffffff80]`}`}>{link}</Link>)}
            
         </ul>
-        <ul className='flex flex-col items-start md:bg-[#0000001d] md:flex-row px-5 md:px-2 rounded-lg p-1'>
+        <ul className='absolute bottom-1 left-0 md:relative flex items-start md:bg-[#0000001d] md:flex-row px-5 md:px-2 rounded-lg p-1'>
           {languageList.map((item, index)=>{
-            return <li key={index}  onClick={() => changeLanguage(item)} className='flex cursor-pointer p-2 px-5 bg-[#838383df] hover:bg-[#c3c3c3e4] rounded md:m-0 m-2 text-white  md:bg-transparent md:text-white  md:hover:text-[#d6d6d6] md:hover:bg-transparent md:p-0 transition'>{item}{index!=languageList.length-1?<span className='hidden md:block'>/</span>:<></>}</li>
+            return <li key={index}  onClick={() => changeLanguage(item)} className='flex cursor-pointer p-2 mx-1 bg-[#8383832c] hover:bg-[#c3c3c3e4] rounded-full md:m-0 text-white  md:bg-transparent md:text-white  md:hover:text-[#d6d6d6] md:hover:bg-transparent md:p-0 transition'>{item}{index!=languageList.length-1?<span className='hidden md:block'>/</span>:<></>}</li>
           })}</ul>
     </div>
   )

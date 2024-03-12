@@ -17,11 +17,11 @@ export const collectionsToSections = {
 }
 export const Sections = Object.values(collectionsToSections);
 export const sectionClasses = {
-    "helloitems": ` md:h-[100vh] bg-slate-500 pb-[10px] md:pb-0  bg-cover  `,
-    "myportfolioitems": 'bg-slate-300',
-    "aboutmeitems": ' md:h-[100vh] bg-slate-400 py-[10px] ',
+    "helloitems": ` h-[100vh] bg-center md:bg-none bg-[url('https://res.cloudinary.com/dujdz2jbl/image/upload/v1710111594/welcome/fs2o82sd0wnoiea7ubot.jpg')] bg-slate-400 pb-[10px] md:pb-0  bg-cover  `,
+    "myportfolioitems": 'relative md:min-h-[100vh] bg-slate-300',
+    "aboutmeitems": ' relative h-[100vh] md:min-h-[100vh] bg-slate-400 py-[10px] ',
     "skillitems": ' bg-slate-300 min-h-[100vh] relative',
-    "mynewsitems": 'md:h-[100vh] bg-slate-300 py-[10px] text-black',
+    "mynewsitems": 'relative h-[100vh] md:min-h-[100vh] bg-slate-300 py-[10px] text-black',
 
   }
 

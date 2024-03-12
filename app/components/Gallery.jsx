@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { renderTextByProperty } from './mainconsts';
 import Link from 'next/link';
 
-const Gallery = ({ sectionData, sectionName }) => {
+const Gallery = ({ sectionData }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isPortfolioItemOpened, setIsPortfolioItemOpened] = useState(false);
   const ref = useRef(null);
@@ -26,17 +26,14 @@ const Gallery = ({ sectionData, sectionName }) => {
   }, [isInView])
 
   return (
-    <>
-       <motion.h1 initial={{ opacity: 0, x: -200 }}
-        whileInView={{opacity: 1, x: 0 }}  transition={{ duration: 0.2 }} className='text-center text-white capitalize'>{sectionName}</motion.h1>
-
     <motion.div className='py-[10px] flex flex-col md:flex-row flex-wrap justify-start items-center h-full place-items-center' ref={ref} initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}}>
       {sectionData.map((sectionItem, index) => (
         <motion.div
           key={index}
           initial={{x: 100}} whileInView={{x: 0}}
           className='flex box-border my-2 md:w-1/2 md:my-1 md:p-2 lg:w-1/3  object-cover object-center overflow-hidden h-fit  relative'
-          
+          drag
+      dragConstraints={{ left: 0, right: 0, top: 0, bottom:0 }}
           onClick={() => handleItemClick(sectionItem)}
         >
           <motion.img
@@ -69,7 +66,7 @@ const Gallery = ({ sectionData, sectionName }) => {
           )}
         </motion.div>
       ))}
-    </motion.div></>
+    </motion.div>
   );
 };
 
