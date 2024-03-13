@@ -21,6 +21,10 @@ export default function RootLayout({
       <LanguageProvider>
       <body className={inter.className}>
         <Header/>
+        
+
+        
+        {/* <div className={`absolute top-0 left-0 w-full bg-[url('https://res.cloudinary.com/dujdz2jbl/image/upload/v1710285053/welcome/bl4vrfjamutjlfx1ygyn.png')] bg-cover`}><div className="w-screen h-[200vh]"></div></div> */}
         {children}
         <Footer/>
         </body>

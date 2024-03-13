@@ -26,12 +26,14 @@ const Gallery = ({ sectionData }) => {
   }, [isInView])
 
   return (
-    <motion.div className=' pb-[100px] flex flex-col md:flex-row flex-wrap justify-start items-center h-full place-items-center' ref={ref} initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}}>
+    <>
+    
+    <motion.div className=' pb-[100px] flex flex-col flex-wrap justify-center items-center h-full place-items-center' ref={ref} initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}}>
       {sectionData.map((sectionItem, index) => (
         <motion.div
           key={index}
           initial={{x: 100}} whileInView={{x: 0}}
-          className='flex box-border my-2 md:w-1/2 md:my-1 md:p-2 lg:w-1/3  object-cover object-center overflow-hidden h-fit  relative'
+          className='flex box-border my-2 md:w-1/2 md:my-1 md:p-2 lg:w-1/2 justify-center items-center md:mx-3 object-cover object-center overflow-hidden h-fit  relative'
           drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom:0 }}
           onClick={() => handleItemClick(sectionItem)}
@@ -67,6 +69,7 @@ const Gallery = ({ sectionData }) => {
         </motion.div>
       ))}
     </motion.div>
+    </>
   );
 };
 

@@ -1,14 +1,26 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from './LanguageContext';
 import Section from './Section';
 import { SectionIndex, SectionToRenderType, sectionClasses } from './mainconsts';
 import Container from './Container';
 import Loader from './Loader';
+import { motion, useViewportScroll,useTransform , useInView, AnimatePresence  } from 'framer-motion';
+export const HelloBg = () => {
+  const ref = useRef(null);
+   const inView = useInView(ref);
+  return <AnimatePresence mode='wait'><motion.div ref={ref} className='top-0 left-0 w-full h-full absolute z-0'>
+  <motion.div initial={{scaleY: 1.5}} animate={{scaleY: 1,}} transition={{ duration: 1 }}  whileInView={{scaleY: 1}} className='h-1/4 w-full bg-[#A5DD9B]'></motion.div>
+  <motion.div initial={{scaleY: 1.5}}  animate={{scaleY: 1}} transition={{ duration: 2 }}  whileInView={{scaleY: 1}} className='h-1/4 w-full bg-[#C5EBAA]'><motion.div></motion.div></motion.div>
+  <motion.div initial={{scaleY: 1.5}} animate={{scaleY: 1}} transition={{ duration: 3 }}   whileInView={{scaleY: 1}} className='h-1/4 w-full bg-[#F6F193]'></motion.div>
+  <div className='h-1/4 w-full bg-[#F2C18D]'></div>
+</motion.div></AnimatePresence>
+}
 function Sections() {
   const [collections, setCollections] = useState([]);
   const [error, setError] = useState(null);
-
+  const { scrollYProgress } = useViewportScroll()
+const scale = useTransform(scrollYProgress, [0, 1], [0.2, 2]);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -38,7 +50,38 @@ function Sections() {
         <Loader/>
     </Container>
   }
-
+  // const portfolioBG = () => {
+  //   return 
+  // }
+  const backgroundToSection = {
+    "myportfolioitems": <div className='top-0 left-0 w-full h-full absolute z-0'>
+      <div className='h-[10%] w-full bg-[#F6F193]'></div>
+      <div className='h-[10%]  w-full bg-[#F6F193]'></div>
+      <div className='h-[10%]  w-full bg-[#F6F193]'></div>
+    <div className='h-[10%]   w-full bg-[#C5EBAA]'>.</div>
+    <div className='h-[10%]  w-full bg-[#C5EBAA]'></div>
+      <div className='h-[10%]  w-full bg-[#C5EBAA]'></div>
+      <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
+    <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
+    <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
+      <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
+    
+    
+</div>,
+    "helloitems": <HelloBg/>,
+    "skillitems": <div className='top-0 left-0 w-full h-full absolute z-0'>
+    <div className='h-1/4 w-full bg-[#A5DD9B]'></div>
+    <div className='h-1/4 w-full bg-[#A5DD9B]'></div>
+    <div className='h-1/4 w-full bg-[#A5DD9B]'></div>
+    <div className='h-1/4 w-full bg-[#C5EBAA]'></div>
+    </div>,
+   "mynewsitems":  <div className='top-0 left-0 w-full h-full absolute z-0'>
+   <div className='h-1/4 w-full bg-[#C5EBAA]'></div>
+   <div className='h-1/4 w-full bg-[#C5EBAA]'></div>
+   <div className='h-1/4 w-full bg-[#C5EBAA]'></div>
+   <div className='h-1/4 w-full bg-[#C5EBAA]'></div>
+   </div>,
+  }
   return (
     <ul>
       {Object.entries(SectionIndex).map(([collectionName, index]) => (
@@ -49,6 +92,8 @@ function Sections() {
             index={index}
             renderType={SectionToRenderType[collectionName]}
             classes={sectionClasses[collectionName]}
+            backgroundItem={backgroundToSection[collectionName]}
+            
           />
         </li>
       ))}

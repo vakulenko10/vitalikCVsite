@@ -30,7 +30,7 @@ const filterDataByLanguage = (collectionData, language) => {
 
 
 
-const Section = ({ collectionName, renderType, className}) => {
+const Section = ({ collectionName, renderType, className, backgroundItem}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -80,6 +80,7 @@ const Section = ({ collectionName, renderType, className}) => {
   };
   console.log("data:", data)
   if(loading){
+    
     return(
       <div id={collectionsToSections[collectionName]} className={`${collectionsToSections[collectionName]} section w-full h-[100vh] overflow-hidden box-border ${className} ${sectionClasses[collectionName]}`}>
         <Container classes={`flex justify-center items-center h-full relative  `}>
@@ -90,7 +91,8 @@ const Section = ({ collectionName, renderType, className}) => {
   }
   else{
     return (
-    <div id={collectionsToSections[collectionName]} className={`${collectionsToSections[collectionName]} min-h-[100vh] section w-full  overflow-hidden box-border pt-[50px] ${className} ${sectionClasses[collectionName]} `}>
+    <div id={collectionsToSections[collectionName]} className={`${collectionsToSections[collectionName]} min-h-[100vh] section w-full overflow-hidden box-border ${className} ${sectionClasses[collectionName]} `}>
+      {backgroundItem}
       <Container >
         {/* {JSON.stringify(data)} */}
         {collectionsToSections[collectionName]!='welcome'?<h1 className='text-center capitalize text-white z-10'>{collectionsToSections[collectionName]}</h1>:null}

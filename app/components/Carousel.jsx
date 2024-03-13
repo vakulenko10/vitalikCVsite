@@ -22,7 +22,7 @@ const Carousel = ({ sectionData, sectionName }) => {
   const activeItemProps = Object.keys(activeItem);
 
   return (
-    <div className='carousel h-[90%] relative overflow-hidden box-border pb-10'>
+    <div className='carousel h-[90%] relative  box-border pb-10'>
       <AnimatePresence mode='wait'>
         <motion.div onClick={nextItem} className='h-full md:grid md:grid-cols-2 gap-[10px] items-center box-border justify-start md:justify-center flex flex-col overflow-hidden' key={activeIndex}
             initial={{ opacity: 0, x: 100 }}

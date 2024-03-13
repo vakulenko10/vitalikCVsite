@@ -7,7 +7,7 @@ const ListOfItems = ({ sectionData }) => {
     <motion.div ref={ref} className='flex flex-col justify-center items-center'>
     
     
-      <motion.div className='pt-[20px] gap-5 flex w-full min-[500px]:w-4/5 md:w-3/5 items-baseline justify-center md:items-baseline md:gap-8 flex-wrap'>
+      <motion.div className=' gap-5 flex w-full min-[500px]:w-4/5 md:w-3/5 items-baseline justify-center md:items-baseline md:gap-8 flex-wrap'>
       {sectionData.map((item, index) => (
         <motion.div initial={{ opacity: 0, x: -index }}
         drag
