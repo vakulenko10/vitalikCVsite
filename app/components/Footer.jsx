@@ -4,7 +4,7 @@ import React from 'react'
 import { FaLinkedin, FaGithub  } from "react-icons/fa";
 const Footer = () => {
   return (
-    <div className='bg-slate-200'>
+    <div className='bg-[#A5DD9B]'>
         <Container>
             <div className='flex flex-col md:flex-row py-5 px-3 justify-between items-center '>
                 <div className='links flex flex-row'>

@@ -17,7 +17,7 @@ export const collectionsToSections = {
 }
 export const Sections = Object.values(collectionsToSections);
 export const sectionClasses = {
-    "helloitems": ` h-[100vh] bg-[#A5DD9B] bg-center pb-[10px] md:pb-0  bg-cover  `,
+    "helloitems": ` min-h-[100vh] bg-[#A5DD9B] bg-center pb-[10px] md:pb-0  bg-cover  `,
     "myportfolioitems": 'relative md:min-h-[100vh] ',
     "aboutmeitems": ' relative h-[100vh] bg-[#F2C18D] md:min-h-[100vh]  py-[10px] ',
     "skillitems": ' bg-slate-300 min-h-[100vh] relative',
