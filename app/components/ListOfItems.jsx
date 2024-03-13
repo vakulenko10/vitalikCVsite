@@ -10,7 +10,7 @@ const ListOfItems = ({ sectionData }) => {
       <motion.div className=' gap-5 flex w-full min-[500px]:w-4/5 md:w-3/5 items-baseline justify-center md:items-baseline md:gap-8 flex-wrap'>
       {sectionData.map((item, index) => (
         <motion.div initial={{ opacity: 0, x: -index }}
-        drag
+        
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
         whileInView={{opacity: 1, x: 0 }}
         whileHover={{scale: 1.1}}
