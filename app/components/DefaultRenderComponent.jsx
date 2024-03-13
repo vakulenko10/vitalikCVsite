@@ -11,13 +11,13 @@ const DefaultRenderComponent = ({ sectionData }) => {
     
     return (
         
-        <div className='flex flex-col justify-between items-center h-full md:gap-10 md:grid md:grid-cols-2 md:items-center md:justify-start'>
-            
-            <motion.div  whileTap={{scale: 0.8, transition: 0.3}} className='order-2  justify-self-center flex md:order-1 justify-center items-center md:justify-end md:items-center relative h-full   overflow-hidden' whileHover={{scale: 1.05}} transition={{duration: 0.2, ease: easeInOut}} initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}>
+        <div className='flex flex-col justify-end items-center h-screen md:gap-10 md:grid md:grid-cols-2 md:items-center md:justify-start'>
+
+            <motion.div  whileTap={{scale: 0.8, transition: 0.3}} className='order-2  justify-self-center flex md:order-1 justify-center items-center md:justify-end md:items-end relative h-fit md:h-full overflow-hidden' whileHover={{scale: 1.05}} transition={{duration: 0.5,  ease: easeInOut}} initial={{scale:1.3, y: 100 }}
+      animate={{ opacity: 1,scale: 1, y: 0}}>
                 {/* Render image on the right side */}
                 {activeItemProps.includes('imageURL') && (
-                    <img src={activeItem['imageURL']} className=' h-full md:h-3/4 object-contain ' alt="Image" />
+                    <img src={activeItem['imageURL']} className='w-full md:h-3/4 md:w-auto  object-contain ' alt="Image" />
                 )}
             </motion.div>
             <motion.div drag

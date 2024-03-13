@@ -197,6 +197,23 @@ button{
   justify-self: start;
   align-self: flex-start;
 }
+.sectionTitle {
+  font-size: 80px;
+}
+h1.about{
+  display: flex;
+}
+h1.about{
+  font-weight: 500;
+  color: #fff;
+}
+h1.about::selection{
+  background-color: transparent;
+  color: red;
+}
+h4.about{
+  color: #ffffffbd;
+}
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

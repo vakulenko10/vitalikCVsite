@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { renderTextByProperty } from './mainconsts';
 import Link from 'next/link';
-
+import { FaGithub } from 'react-icons/fa';
+import { BsFillEyeFill } from "react-icons/bs";
 const Gallery = ({ sectionData }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isPortfolioItemOpened, setIsPortfolioItemOpened] = useState(false);
@@ -33,25 +34,33 @@ const Gallery = ({ sectionData }) => {
         <motion.div
           key={index}
           initial={{x: 100}} whileInView={{x: 0}}
-          className='flex box-border my-2 md:w-1/2 md:my-1 md:p-2 lg:w-1/2 justify-center items-center md:mx-3 object-cover object-center overflow-hidden h-fit  relative'
-          drag
+          className='group flex box-border my-2 md:w-1/2 md:my-1  lg:w-1/2 justify-center items-center md:mx-3 object-cover object-center overflow-hidden h-fit  relative'
+          
       dragConstraints={{ left: 0, right: 0, top: 0, bottom:0 }}
           onClick={() => handleItemClick(sectionItem)}
         >
-          <motion.img
-            className='object-cover w-full object-center overflow-hidden box-border '
+          <div className=' transition duration-150 content z-10 absolute top-0 left-0 h-full w-full  group-hover:flex justify-center items-center bg-[#000000a0] group-hover:bg-[#000000c9]'>
+            <div className='links hidden group-hover:flex gap-10'>
+            <Link target="_blank" className='transition bg-[#ffffff32] hover:bg-[#ffffffb2] rounded-full p-2' href={sectionItem['projectURL']}>
+              <BsFillEyeFill  className=' transition w-[50px]  h-auto fill-[#fff]' />
+              </Link>
+            <Link target="_blank"  className='transition bg-[#ffffff32] hover:bg-[#ffffffb2] rounded-full p-2 ' href={sectionItem['projectURL']}>
+              <FaGithub className=' transition  w-[50px]  h-auto fill-[#fff]' />
+            </Link>
+            </div>
+          </div>
+          <img
+            className='z-9 object-cover w-full object-center overflow-hidden box-border '
             src={sectionItem['imageURL']}
             alt={index}
-            initial={{scale: 1.03}}
-            whileHover={{ scale: 1}}
           />
-          {(selectedItem === sectionItem && selectedItem != null) && (
+          {/* {(selectedItem === sectionItem && selectedItem != null) && (
             <motion.div
               className={`${isPortfolioItemOpened && selectedItem === sectionItem ? 'fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-[#000000cd] bg-opacity-50 z-[1000] py-10' : 'hidden'}`}
             >
               <div className='PortfolioItemInfo p-4 h-full w-full overflow-y-scroll overflow-x-hidden text-wrap break-words'>
                 <h3 className='text-white'>click on the image to experience the project online</h3>
-                {(selectedItem['imageURL'] && selectedItem['projectURL'])?<Link href={selectedItem['projectURL']}><motion.img src={selectedItem['imageURL']} key={index} alt={index} className='h-1/2 object-contain ' whileHover={{scale: 1.03}}/></Link>:<></>}
+                
                 {Object.keys(selectedItem).map((prop, index) => {
                   if (prop !== 'imageURL' && prop !== 'projectURL') {
                     return renderTextByProperty(prop, selectedItem[prop], index, 'text-white ');
@@ -65,7 +74,7 @@ const Gallery = ({ sectionData }) => {
                 </button>
               </div>
             </motion.div>
-          )}
+          )} */}
         </motion.div>
       ))}
     </motion.div>

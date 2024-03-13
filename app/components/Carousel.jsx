@@ -22,7 +22,7 @@ const Carousel = ({ sectionData, sectionName }) => {
   const activeItemProps = Object.keys(activeItem);
 
   return (
-    <div className='carousel h-[90%] relative  box-border pb-10'>
+    <div className='carousel h-[80%] relative  box-border pb-10'>
       <AnimatePresence mode='wait'>
         <motion.div onClick={nextItem} className='h-full md:grid md:grid-cols-2 gap-[10px] items-center box-border justify-start md:justify-center flex flex-col overflow-hidden' key={activeIndex}
             initial={{ opacity: 0, x: 100 }}
@@ -30,7 +30,7 @@ const Carousel = ({ sectionData, sectionName }) => {
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.5 }}
             ref={ref}>
-                <motion.div className='box-border justify-self-center overflow-hidden relative h-3/4' initial={{x: 100, scale: 1}} whileInView={{x:0}} whileHover={{scale: 1.01}} >
+                <motion.div className='box-border justify-self-center overflow-hidden relative h-full' initial={{x: 100, scale: 1}} whileInView={{x:0}} whileHover={{scale: 1.01}} >
                   {activeItemProps.includes('imageURL') && (
                       <img src={activeItem['imageURL']} className='h-full object-contain' alt="Image" />
                     
@@ -42,7 +42,7 @@ const Carousel = ({ sectionData, sectionName }) => {
                       {activeItemProps.map((prop, index) => {
                         if (prop !== 'imageURL' && prop !== 'imageDate') {
                           return (
-                            renderTextByProperty(prop, activeItem[prop], index, 'inherit')
+                            renderTextByProperty(prop, activeItem[prop], index, 'inherit about')
                           );
                         }
                         return null; // Skip rendering imageURL here

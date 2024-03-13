@@ -95,7 +95,7 @@ const Section = ({ collectionName, renderType, className, backgroundItem}) => {
       {backgroundItem}
       <Container >
         {/* {JSON.stringify(data)} */}
-        {collectionsToSections[collectionName]!='welcome'?<h1 className='text-center capitalize text-white z-10'>{collectionsToSections[collectionName]}</h1>:null}
+        {collectionsToSections[collectionName]!='welcome'?<h1 className='text-center capitalize text-white z-10 md:sectionTitle'>{collectionsToSections[collectionName]}</h1>:null}
         {RenderTypeToComponent(renderType, data)}
         <Socials/>
       </Container>
