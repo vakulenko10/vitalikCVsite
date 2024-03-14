@@ -54,6 +54,14 @@ const Gallery = ({ sectionData }) => {
             src={sectionItem['imageURL']}
             alt={index}
           />
+          <div>{Object.keys(sectionItem).map((prop, index) => {
+                  if (prop !== 'imageURL' && prop !== 'projectURL') {
+                    return renderTextByProperty(prop, sectionItem[prop], index, 'text-white ') 
+                    
+                  }
+                  return
+                  
+                })} </div>
           {/* {(selectedItem === sectionItem && selectedItem != null) && (
             <motion.div
               className={`${isPortfolioItemOpened && selectedItem === sectionItem ? 'fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-[#000000cd] bg-opacity-50 z-[1000] py-10' : 'hidden'}`}
