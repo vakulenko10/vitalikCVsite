@@ -27,66 +27,46 @@ const Gallery = ({ sectionData }) => {
   }, [isInView])
 
   return (
-    <>
+    <div className='pt-10'>
     
-    <motion.div className=' pb-[100px] flex flex-col flex-wrap justify-center items-center h-full place-items-center' ref={ref} initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}}>
+    <motion.div className='mx-auto  pb-[100px] flex flex-col gap-10  flex-wrap justify-center items-center h-full place-items-center' ref={ref} initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 0.3}}>
       {sectionData.map((sectionItem, index) => (
-        <motion.div
-          key={index}
-          initial={{x: 100}} whileInView={{x: 0}}
-          className='group flex box-border my-2 md:w-1/2 md:my-1  lg:w-1/2 justify-center items-center md:mx-3 object-cover object-center overflow-hidden h-fit  relative'
-          
-      dragConstraints={{ left: 0, right: 0, top: 0, bottom:0 }}
-          onClick={() => handleItemClick(sectionItem)}
-        >
-          <div className=' transition duration-150 content z-10 absolute top-0 left-0 h-full w-full  group-hover:flex justify-center items-center bg-[#000000a0] group-hover:bg-[#000000c9]'>
+        <motion.div key={index}
+        initial={{x: 200}} whileInView={{x: 0}}
+        whileHover={{scale: 1.05}}
+        className='group group-hover:h-full shadow-[0_0_20px]hover:shadow-[0_0_70px] transition box-border md:w-3/4 h-full md:my-1 md:justify-center md:items-center md:flex-col justify-center items-center md:mx-3 object-cover object-center overflow-hidden relative bg-[#ffffff] p-4 rounded-xl'>
+          <div className='relative box-border overflow-hidden '>
+          <div className=' rounded-lg transition duration-150 content z-10 absolute top-0 left-0 h-full w-full  group-hover:flex justify-center items-center  group-hover:bg-[#000000c9]'>
             <div className='links hidden group-hover:flex gap-10'>
             <Link target="_blank" className='transition bg-[#ffffff32] hover:bg-[#ffffffb2] rounded-full p-2' href={sectionItem['projectURL']}>
               <BsFillEyeFill  className=' transition w-[50px]  h-auto fill-[#fff]' />
               </Link>
-            <Link target="_blank"  className='transition bg-[#ffffff32] hover:bg-[#ffffffb2] rounded-full p-2 ' href={sectionItem['projectURL']}>
+            <Link target="_blank"  className='transition bg-[#ffffff32] hover:bg-[#ffffffb2] rounded-full p-2 ' href={sectionItem['gitHubRepoURL']}>
               <FaGithub className=' transition  w-[50px]  h-auto fill-[#fff]' />
             </Link>
             </div>
           </div>
           <img
-            className='z-9 object-cover w-full object-center overflow-hidden box-border '
+            className='z-9 object-cover w-full group-hover:scale-[1.1] transition object-center overflow-hidden box-border rounded-lg '
             src={sectionItem['imageURL']}
             alt={index}
-          />
-          <div>{Object.keys(sectionItem).map((prop, index) => {
-                  if (prop !== 'imageURL' && prop !== 'projectURL') {
-                    return renderTextByProperty(prop, sectionItem[prop], index, 'text-white ') 
-                    
-                  }
-                  return
+          /></div>
+        <div className='text-center pt-10'>{
+              Object.keys(sectionItem).map((prop, index) => {
+                if (prop !== 'imageURL' && !prop.includes('URL')) {
+                  return renderTextByProperty(prop, sectionItem[prop], index, 'text-white group-hover:text-black ') 
                   
-                })} </div>
-          {/* {(selectedItem === sectionItem && selectedItem != null) && (
-            <motion.div
-              className={`${isPortfolioItemOpened && selectedItem === sectionItem ? 'fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-[#000000cd] bg-opacity-50 z-[1000] py-10' : 'hidden'}`}
-            >
-              <div className='PortfolioItemInfo p-4 h-full w-full overflow-y-scroll overflow-x-hidden text-wrap break-words'>
-                <h3 className='text-white'>click on the image to experience the project online</h3>
-                
-                {Object.keys(selectedItem).map((prop, index) => {
-                  if (prop !== 'imageURL' && prop !== 'projectURL') {
-                    return renderTextByProperty(prop, selectedItem[prop], index, 'text-white ');
-                  }
-                  return
-                  
-                })}
-
-                <button className='absolute top-0 right-0 mt-4 mr-4 bg-[#751a1ab1] text-white py-2 px-4 rounded-md z-[1]' onClick={handleClose}>
-                  Close
-                </button>
-              </div>
-            </motion.div>
-          )} */}
-        </motion.div>
+                }
+                return
+                })
+            } 
+        </div> 
+      </motion.div>
+        
       ))}
+       
     </motion.div>
-    </>
+    </div>
   );
 };
 

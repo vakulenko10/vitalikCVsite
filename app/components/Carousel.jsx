@@ -22,7 +22,7 @@ const Carousel = ({ sectionData, sectionName }) => {
   const activeItemProps = Object.keys(activeItem);
 
   return (
-    <div className='carousel h-[80%] relative  box-border pb-10'>
+    <div className='carousel h-[90%] relative  box-border pb-10'>
       <AnimatePresence mode='wait'>
         <motion.div onClick={nextItem} className='h-full md:grid md:grid-cols-2 gap-[10px] items-center box-border justify-start md:justify-center flex flex-col overflow-hidden' key={activeIndex}
             initial={{ opacity: 0, x: 100 }}
@@ -38,7 +38,7 @@ const Carousel = ({ sectionData, sectionName }) => {
                 </motion.div>
                 <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}}  whileHover={{scale: 1.01}} className='relative flex flex-col gap-[20px] justify-end text-center md:text-left items-center md:items-start text-white'>
           
-                    <div className='w-full overflow-hidden  text break-words flex flex-wrap flex-col justify-between'>
+                    <div className='w-full overflow-hidden  text break-words flex flex-wrap flex-col md:justify-start md:items-start justify-between  items-center'>
                       {activeItemProps.map((prop, index) => {
                         if (prop !== 'imageURL' && prop !== 'imageDate') {
                           return (
