@@ -25,7 +25,7 @@ const Header = () => {
     <header className={` w-full  text-white z-[999] absolute `}>
       <Container>
         <nav className="px-4 lg:px-6 py-2.5 flex justify-between items-center">
-          <h5 className={`text-2xl md:visible  `}>Vitalik</h5>
+          <h5 className={`text-2xl md:visible  `}>*#%#</h5>
           <LinksContainer isSmallHeaderActive={isSmallHeaderActive} setIsSmallHeaderActive={setIsSmallHeaderActive} />
           
           <HeaderBurger classes={''} handleBurgerChange={handleBurgerChange} isSmallHeaderActive={isSmallHeaderActive}/>

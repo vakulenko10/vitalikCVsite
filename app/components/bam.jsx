@@ -83,7 +83,7 @@ function YourComponent() {
         const jsonData = await response.json();
         const language = 'en';
         const filteredData = filterDataByLanguage(jsonData.data, language);
-        console.log("Data:", jsonData.data)
+        // console.log("Data:", jsonData.data)
         setData(filteredData);
       } catch (error) {
         setError(error.message);

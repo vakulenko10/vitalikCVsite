@@ -18,10 +18,10 @@ export const collectionsToSections = {
 export const Sections = Object.values(collectionsToSections);
 export const sectionClasses = {
     "helloitems": ` min-h-[100vh] bg-[#F2C18D] bg-center pb-[10px] md:pb-0  bg-cover  `,
-    "myportfolioitems": 'relative md:min-h-[100vh] ',
+    "myportfolioitems": 'bg-[#C5EBAA] relative md:min-h-[100vh] ',
     "aboutmeitems": ' relative h-[100vh] bg-[#F2C18D] md:min-h-[100vh]  py-[10px] ',
-    "skillitems": ' bg-slate-300 min-h-[100vh] relative',
-    "mynewsitems": 'relative h-[100vh] md:min-h-[100vh] bg-slate-300 py-[10px] text-black',
+    "skillitems": ' bg-[#C5EBAA] min-h-[100vh] relative',
+    "mynewsitems": 'relative h-[100vh] md:min-h-[100vh] bg-[#C5EBAA] py-[10px] text-black',
 
   }
 
@@ -34,7 +34,7 @@ export const SectionToRenderType = {
 }
 export function renderTextByProperty(property, text, key, className) {
     if (property.includes('Title')) {
-      return <h1 className={`${className}`} key={key}>{text}</h1>;
+      return <h1 className={`${className} `} key={key}>{text}</h1>;
     } else if (property.includes('Description')) {
       return <h4 className={`${className}`} key={key}>{text}</h4>;
     }

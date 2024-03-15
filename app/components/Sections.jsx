@@ -10,7 +10,7 @@ export const HelloBg = () => {
   const ref = useRef(null);
    const inView = useInView(ref);
   return <AnimatePresence mode='wait'><motion.div ref={ref} className='top-0 left-0 w-full h-full z-0'>
-  <motion.div initial={{height: '300%',y: 500,}} animate={{height:'100%',y: 0}} transition={{delay:0, duration: 1}}  whileInView={{scaleY: 1}} className=' absolute top-0 z-1 h-3/4 w-full bg-[#A5DD9B] ' whileHover={{backgroundColor:"#85b37d"}}></motion.div>
+  <motion.div initial={{height: '300%',y: 500,}} animate={{height:'100%',y: 0}} transition={{delay:0, duration: 1}}  whileInView={{scaleY: 1}} className=' absolute top-0 z-1 h-3/4 w-full bg-[#A5DD9B] '></motion.div>
   <motion.div initial={{y: 500,}}   animate={{height:'75%', y:0}} transition={{delay: 0.1, duration:1 }}  whileInView={{scaleY: 1}} className='absolute top-1/4 z-2 h-1/2 w-full bg-[#C5EBAA]'><motion.div></motion.div></motion.div>
   <motion.div initial={{height: '300%',y: 500,}}  animate={{height: '50%', y:0}} transition={{ delay:0.2 ,duration:1}} className='z-3 absolute top-1/2  h-1/4 w-full bg-[#F6F193]'></motion.div>
   <motion.div initial={{height: '300%', y:300}}  animate={{height: '25%', y:0}} transition={{delay:0.3,  duration:1}} className='z-4 absolute top-3/4 h-1/4 w-full bg-[#F2C18D]'></motion.div>

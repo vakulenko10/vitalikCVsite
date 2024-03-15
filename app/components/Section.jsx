@@ -23,7 +23,7 @@ const filterDataByLanguage = (collectionData, language) => {
         }
       }
     }
-    console.log("filteredItems: ",filteredItems)
+    // console.log("filteredItems: ",filteredItems)
     return filteredItems;
   });
 };
@@ -40,12 +40,12 @@ const Section = ({ collectionName, renderType, className, backgroundItem}) => {
     async function fetchData() {
       try {
         const response = await fetch(`/api/fetchContentFromDB/${collectionName}`);
-        console.log("response: ", response)
+        // console.log("response: ", response)
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
         const jsonData = await response.json(); 
-        console.log("jsonData: ",jsonData)
+        // console.log("jsonData: ",jsonData)
         const filteredData = filterDataByLanguage(jsonData.documents, language);
         setData(filteredData);
         setLoading(false)
@@ -78,7 +78,7 @@ const Section = ({ collectionName, renderType, className, backgroundItem}) => {
       }
     
   };
-  console.log("data:", data)
+  // console.log("data:", data)
   if(loading){
     
     return(
@@ -95,7 +95,7 @@ const Section = ({ collectionName, renderType, className, backgroundItem}) => {
       {backgroundItem}
       <Container >
         {/* {JSON.stringify(data)} */}
-        {collectionsToSections[collectionName]!='welcome'?<h1 className='text-center capitalize text-white z-10 md:sectionTitle'>{collectionsToSections[collectionName]}</h1>:null}
+        {collectionsToSections[collectionName]!='welcome'?<div className='flex justify-center items-center'><h1 className='text-center bg-[#D99592] capitalize my-5 text-white z-10 md:sectionTitle'>{collectionsToSections[collectionName]}</h1></div>:null}
         {RenderTypeToComponent(renderType, data)}
         <Socials/>
       </Container>
