@@ -24,7 +24,7 @@ const Carousel = ({ sectionData, sectionName }) => {
   return (
     <div className='carousel h-[80%] relative  box-border pb-10'>
       <AnimatePresence mode='wait'>
-        <motion.div onClick={nextItem} className='h-full md:grid md:grid-cols-2 gap-[10px] items-center box-border justify-start md:justify-center flex flex-col overflow-hidden' key={activeIndex}
+        <motion.div onClick={nextItem} title="click here to show the next item" className='h-full md:grid md:grid-cols-2 gap-[10px] items-center box-border justify-start md:justify-center flex flex-col overflow-hidden' key={activeIndex}
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
