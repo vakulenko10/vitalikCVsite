@@ -15,11 +15,20 @@ const LinksContainer = ({isSmallHeaderActive, setIsSmallHeaderActive}) => {
   const handleBurgerChange = (e) => {
     setIsSmallHeaderActive(e.target.checked);
   };
-  const changeLanguage = () =>{
-    setLanguageIndex((prev) => prev==languageList.length-1?setLanguageIndex(0):prev<languageList.length?setLanguageIndex(prev+1):setLanguageIndex(0))
-    setLanguage(languageList[languageIndex]);
-    setIsSmallHeaderActive(false)
+  const changeLanguage = () => {
+    // Calculate the index of the next language
+    const nextLanguageIndex = (languageIndex + 1) % languageList.length;
+    console.log('clicked')
+    // Update the language state directly
+    setLanguage(languageList[nextLanguageIndex]);
+  
+    // Update the languageIndex state
+    setLanguageIndex(nextLanguageIndex);
+  
+    // Close the small header
+    setIsSmallHeaderActive(false);
   }
+  
     const handleLinkClick = () =>{
         
       setIsSmallHeaderActive(false)
@@ -39,7 +48,7 @@ const LinksContainer = ({isSmallHeaderActive, setIsSmallHeaderActive}) => {
             {Sections.map((link, index)=> <Link key={index} onClick={handleLinkClick} href={`#${link}`} className={` text-[30px] md:text-[20px] transition duration-200 ease-linear ${isSmallHeaderActive?`md:bg-transparent p-5 hover:bg-[#fafafa9e] md:hover:bg-transparent md:hover:text-[#ffffffec] md:p-0 `:`md:hover:text-[#ffffff80]`}`}>{link}</Link>)}
            
         </ul>
-        <button title='click to change the language' className='px-6 rounded-full bg-[#C5EBAA] md:bg-[#C5EBAA]' onClick={changeLanguage}>{language}</button>
+        <button title='click to change the language' className='langbtn  font-bold px-6 rounded-full bg-[#C5EBAA] md:bg-[#F2C18D]' onClick={changeLanguage}><h4 className='text-[#fff] langbtn-hover:text-[#fff]'>{language}</h4></button>
         
     </div>
   )

@@ -8,8 +8,8 @@ const Footer = () => {
         <Container>
             <div className='flex flex-col md:flex-row py-5 px-3 justify-between items-center '>
                 <div className='links flex flex-row'>
-                    <Link href="https://www.linkedin.com/in/vitalik-vakulenko/"><FaLinkedin className="hover:fill-[#686868b7] transition" size={30} /></Link>
-                    <Link href="https://github.com/vakulenko10"><FaGithub className="hover:fill-[#686868b7] transition" size={30}/></Link>
+                    <Link title='linkedin' href="https://www.linkedin.com/in/vitalik-vakulenko/"><FaLinkedin className=" fill-[#3e3e3e] hover:fill-[#686868b7] transition" size={30} /></Link>
+                    <Link title='github' href="https://github.com/vakulenko10"><FaGithub className="fill-[#3e3e3e]  hover:fill-[#686868b7] transition" size={30}/></Link>
                     
                 </div>
                 <div className='text-center md:text-end'>
