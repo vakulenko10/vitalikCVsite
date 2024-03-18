@@ -28,7 +28,7 @@ const DefaultRenderComponent = ({ sectionData }) => {
                 <div className='text py-10 '>{activeItemProps.map((prop, index) => {
                     if (prop !== 'imageURL') {
                         return (
-                            renderTextByProperty(prop, activeItem[prop], index, 'text-white welcome ')
+                            renderTextByProperty(prop, activeItem[prop], index, 'text-white welcome md:table ')
                         );
                     }
                     return null; // Skip rendering imageURL here
