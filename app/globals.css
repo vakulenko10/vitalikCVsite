@@ -11,6 +11,11 @@
 /* body{
   min-height: 100vh;
 } */
+* ::-webkit-scrollbar {
+    width: 0; /* Hide scrollbar width */
+    height: 0; /* Hide scrollbar height */
+  }
+
 .page{
   padding-top: 100px;
   min-height: 80vh;
