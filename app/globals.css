@@ -12,10 +12,22 @@
   min-height: 100vh;
 } */
 * ::-webkit-scrollbar {
-    width: 0; /* Hide scrollbar width */
-    height: 0; /* Hide scrollbar height */
-  }
+  width: 15px; /* Width of the scrollbar */
+  height: 10px; /* Height of the horizontal scrollbar */
+}
 
+* ::-webkit-scrollbar-thumb {
+  @apply bg-[#A5DD9B]; /* Gradient for the scrollbar thumb */
+  border-radius: 8px; /* Rounded corners */
+  border: 2px solid transparent; /* Add some padding */
+  background-clip: padding-box; /* Ensure the border is visible */
+}
+
+/* */
+
+* ::-webkit-scrollbar-track {
+  @apply bg-[#f2f2f2];  /* Light background for the scrollbar track */
+}
 .page{
   padding-top: 100px;
   min-height: 80vh;
