@@ -30,3 +30,4 @@ const SectionItem = ({ collectionName, item, index }: SectionItemProps) => {
 
 export default SectionItem;
 
+

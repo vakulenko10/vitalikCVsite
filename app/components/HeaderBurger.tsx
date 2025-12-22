@@ -24,3 +24,4 @@ const HeaderBurger = ({ classes, handleBurgerChange, isSmallHeaderActive }: Head
 
 export default HeaderBurger;
 
+

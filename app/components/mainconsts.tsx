@@ -60,3 +60,4 @@ export function renderTextByProperty(property: string, text: string, key: string
     return <p className={`${className}`} key={key}>{text}</p>;
 }
 
+
