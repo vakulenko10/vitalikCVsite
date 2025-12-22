@@ -40,6 +40,39 @@
   width: 0 !important;
   height: 0 !important;
 }
+
+/* Absolutely prevent scrollbars in carousel - highest priority */
+.carousel,
+.carousel *,
+.carousel *::before,
+.carousel *::after {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+.carousel::-webkit-scrollbar,
+.carousel *::-webkit-scrollbar,
+.carousel *::before::-webkit-scrollbar,
+.carousel *::after::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+.carousel::-webkit-scrollbar-track,
+.carousel *::-webkit-scrollbar-track {
+  display: none !important;
+  background: transparent !important;
+}
+
+.carousel::-webkit-scrollbar-thumb,
+.carousel *::-webkit-scrollbar-thumb {
+  display: none !important;
+  background: transparent !important;
+}
 .page{
   padding-top: 100px;
   min-height: 80vh;

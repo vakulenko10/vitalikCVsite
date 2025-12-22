@@ -76,7 +76,7 @@ const Carousel = ({ sectionData, sectionName }: CarouselProps) => {
   };
 
   return (
-    <div className='carousel h-[80%] relative box-border pb-10'>
+    <div className='carousel h-[80%] relative box-border pb-10 overflow-hidden'>
       {/* Arrow buttons */}
       {sectionData.length > 1 && (
         <>
@@ -104,11 +104,12 @@ const Carousel = ({ sectionData, sectionName }: CarouselProps) => {
         dragElastic={0.2}
         onDragStart={() => setIsDragging(true)}
         onDragEnd={handleDragEnd}
-        className='h-full w-full flex overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth cursor-grab active:cursor-grabbing'
+        className='h-full w-full flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide scroll-smooth cursor-grab active:cursor-grabbing'
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
           WebkitOverflowScrolling: 'touch',
+          overflowY: 'hidden',
         }}
       >
         {sectionData.map((item, itemIndex) => {
