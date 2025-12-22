@@ -1,13 +1,18 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { renderTextByProperty } from "./mainconsts";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import { BsFillEyeFill } from "react-icons/bs";
 
-const Gallery = ({ sectionData, sectionName }) => {
-  const ref = useRef(null);
+interface GalleryProps {
+  sectionData: Record<string, unknown>[];
+  sectionName: string;
+}
+
+const Gallery = ({ sectionData, sectionName }: GalleryProps) => {
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref);
 
   return (
@@ -23,7 +28,8 @@ const Gallery = ({ sectionData, sectionName }) => {
           <motion.div
             key={index}
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1, delay: 0.1 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
             className="group shadow-md hover:shadow-lg transition-transform bg-white p-4 rounded-lg overflow-hidden relative"
           >
             {/* Image Wrapper */}
@@ -33,14 +39,14 @@ const Gallery = ({ sectionData, sectionName }) => {
                 <div className="flex gap-4">
                   <Link
                     target="_blank"
-                    href={sectionItem["projectURL"]}
+                    href={String(sectionItem["projectURL"] || "#")}
                     className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
                   >
                     <BsFillEyeFill className="text-white w-6 h-6" />
                   </Link>
                   <Link
                     target="_blank"
-                    href={sectionItem["gitHubRepoURL"]}
+                    href={String(sectionItem["gitHubRepoURL"] || "#")}
                     className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
                   >
                     <FaGithub className="text-white w-6 h-6" />
@@ -48,8 +54,8 @@ const Gallery = ({ sectionData, sectionName }) => {
                 </div>
               </div>
               <img
-                src={sectionItem["imageURL"]}
-                alt={index}
+                src={String(sectionItem["imageURL"] || "")}
+                alt={`${index}`}
                 className="w-full h-56 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
               />
             </div>
@@ -59,7 +65,7 @@ const Gallery = ({ sectionData, sectionName }) => {
                 if (prop !== "imageURL" && !prop.includes("URL")) {
                   return renderTextByProperty(
                     prop,
-                    sectionItem[prop],
+                    String(sectionItem[prop] || ""),
                     idx,
                     `text-gray-800 ${sectionName}`
                   );
@@ -75,3 +81,4 @@ const Gallery = ({ sectionData, sectionName }) => {
 };
 
 export default Gallery;
+
