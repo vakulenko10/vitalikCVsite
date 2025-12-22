@@ -73,6 +73,25 @@
   display: none !important;
   background: transparent !important;
 }
+
+/* Ensure carousel scroll container properly clips content */
+.carousel > div:first-of-type {
+  overflow: hidden !important;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  isolation: isolate;
+}
+
+.carousel > div:first-of-type > div {
+  contain: layout style paint;
+}
+
+/* Ensure carousel items are properly contained and don't overflow */
+.carousel > div:first-of-type > div > div {
+  contain: layout style paint;
+  will-change: transform;
+}
 .page{
   padding-top: 100px;
   min-height: 80vh;

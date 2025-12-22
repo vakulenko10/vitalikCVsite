@@ -97,53 +97,56 @@ const Carousel = ({ sectionData, sectionName }: CarouselProps) => {
         </>
       )}
 
-      <motion.div
-        ref={scrollContainerRef}
-        drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.2}
-        onDragStart={() => setIsDragging(true)}
-        onDragEnd={handleDragEnd}
-        className='h-full w-full flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide scroll-smooth cursor-grab active:cursor-grabbing'
-        style={{
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-          WebkitOverflowScrolling: 'touch',
-          overflowY: 'hidden',
-        }}
-      >
+      <div className='h-full w-full overflow-hidden relative' style={{ contain: 'layout style paint' }}>
+        <motion.div
+          ref={scrollContainerRef}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onDragStart={() => setIsDragging(true)}
+          onDragEnd={handleDragEnd}
+          className='h-full w-full flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide scroll-smooth cursor-grab active:cursor-grabbing'
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch',
+            overflowY: 'hidden',
+            overflowX: 'scroll',
+            contain: 'layout style paint',
+            paddingLeft: '0px',
+            paddingRight: '0px',
+          }}
+        >
         {sectionData.map((item, itemIndex) => {
           const itemProps = Object.keys(item);
           
           return (
             <div
               key={itemIndex}
-              className='h-full w-full flex-shrink-0 snap-center md:grid md:grid-cols-2 gap-[10px] items-center box-border justify-start md:justify-center flex flex-col px-2'
+              className='h-full w-full flex-shrink-0 snap-center md:grid md:grid-cols-2 gap-[10px] items-center box-border justify-start md:justify-center flex flex-col px-2 md:px-16'
+              style={{ minWidth: '100%', maxWidth: '100%', width: '100%' }}
             >
-              <motion.div
-                className='box-border justify-self-center overflow-hidden relative h-full'
-                initial={{ x: 100, scale: 1 }}
-                whileInView={{ x: 0 }}
-                whileHover={{ scale: 1.01 }}
-              >
+              <div className='box-border justify-self-center overflow-hidden relative h-full w-full'>
                 {itemProps.includes('imageURL') && (
                   <img
                     src={String(item['imageURL'])}
-                    className='h-full object-contain'
+                    className='h-full w-full object-contain'
                     alt="Image"
                     draggable={false}
                   />
                 )}
-              </motion.div>
+              </div>
               
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ duration: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5 }}
                 whileHover={{ scale: 1.01 }}
                 className='relative flex flex-col gap-[20px] justify-end text-center md:text-left items-center md:items-start text-white'
+                style={{ zIndex: 10 }}
               >
-                <div className='w-full overflow-hidden text break-words flex flex-wrap flex-col md:justify-start md:items-start justify-between items-center'>
+                <div className='w-full overflow-hidden text break-words flex flex-wrap flex-col md:justify-start md:items-start justify-between items-center pr-0 md:pr-4'>
                   {itemProps.map((prop, index) => {
                     if (prop !== 'imageURL' && prop !== 'imageDate') {
                       return (
@@ -157,7 +160,8 @@ const Carousel = ({ sectionData, sectionName }: CarouselProps) => {
             </div>
           );
         })}
-      </motion.div>
+        </motion.div>
+      </div>
       
       {/* Indicator dots - larger and more clickable */}
       <div className='absolute mt-[10px] bottom-[20px] left-1/2 transform -translate-x-1/2 flex justify-center gap-2 z-20'>
