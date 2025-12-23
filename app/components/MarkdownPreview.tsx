@@ -50,13 +50,24 @@ const MarkdownPreview = ({ content, className = "" }: MarkdownPreviewProps) => {
             />
           ),
           img: ({ node, ...props }: any) => {
-            const { src, alt } = props;
+            // Extract image properties - react-markdown passes them directly
+            const src = props.src || node?.properties?.src;
+            const alt = props.alt || node?.properties?.alt || "Image";
+            const title = props.title || node?.properties?.title;
+            
+            if (!src) {
+              console.warn("Image missing src:", props);
+              return null;
+            }
+            
             return (
               <img
-                src={src || ""}
-                alt={alt || "Image"}
-                className="rounded-lg shadow-md my-4 max-w-full h-auto"
+                src={String(src)}
+                alt={String(alt)}
+                title={title ? String(title) : undefined}
+                className="rounded-lg shadow-md my-4 max-w-full h-auto w-full"
                 loading="lazy"
+                style={{ display: "block" }}
                 onError={(e) => {
                   console.error("Image failed to load:", src);
                   (e.target as HTMLImageElement).style.display = "none";

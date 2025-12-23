@@ -132,6 +132,9 @@ const ProjectDescriptionPage = () => {
     return (
       <div className="min-h-screen pt-12 flex items-center justify-center bg-[#C5EBAA] relative px-4">
         <div className="absolute top-0 left-0 w-full h-full z-0">
+          <div className='h-[10%]   w-full bg-[#C5EBAA]'></div>
+          <div className='h-[10%]  w-full bg-[#C5EBAA]'></div>
+          <div className='h-[10%]  w-full bg-[#C5EBAA]'></div>
           <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
           <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
           <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
@@ -149,7 +152,7 @@ const ProjectDescriptionPage = () => {
             Oops! No Description Found
           </h1>
           <p className="text-white mb-6">
-            This project doesn't have a description yet. Check back later or explore other projects!
+            This project doesn&apos;t have a description yet. Check back later or explore other projects!
           </p>
           <Link
             href="/#myPortfolio"
