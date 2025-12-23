@@ -16,6 +16,9 @@ const filterDataByLanguage = (collectionData: Record<string, unknown>[], languag
 
   return collectionData.map(item => {
     const filteredItems: Record<string, unknown> = {};
+    // Store _id separately for navigation (not in filteredItems to avoid rendering)
+    const itemId = item._id;
+    
     for (const key in item) {
       if (
         ((!key.startsWith('ua') && !key.startsWith('pl')) && (language === 'en')) ||
@@ -26,6 +29,10 @@ const filterDataByLanguage = (collectionData: Record<string, unknown>[], languag
           filteredItems[key] = item[key];
         }
       }
+    }
+    // Add _id back only for navigation purposes (will be filtered out in Gallery render)
+    if (itemId) {
+      filteredItems._id = itemId;
     }
     return filteredItems;
   });

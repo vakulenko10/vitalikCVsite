@@ -5,6 +5,7 @@ import { renderTextByProperty } from "./mainconsts";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import { BsFillEyeFill } from "react-icons/bs";
+import { BsFileText } from "react-icons/bs";
 
 interface GalleryProps {
   sectionData: Record<string, unknown>[];
@@ -37,20 +38,35 @@ const Gallery = ({ sectionData, sectionName }: GalleryProps) => {
               {/* Overlay */}
               <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 z-10 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="flex gap-4">
-                  <Link
-                    target="_blank"
-                    href={String(sectionItem["projectURL"] || "#")}
-                    className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
-                  >
-                    <BsFillEyeFill className="text-white w-6 h-6" />
-                  </Link>
-                  <Link
-                    target="_blank"
-                    href={String(sectionItem["gitHubRepoURL"] || "#")}
-                    className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
-                  >
-                    <FaGithub className="text-white w-6 h-6" />
-                  </Link>
+                  {sectionItem["projectURL"] && (
+                    <Link
+                      target="_blank"
+                      href={String(sectionItem["projectURL"])}
+                      className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
+                      title="View Project"
+                    >
+                      <BsFillEyeFill className="text-white w-6 h-6" />
+                    </Link>
+                  )}
+                  {sectionItem["gitHubRepoURL"] && (
+                    <Link
+                      target="_blank"
+                      href={String(sectionItem["gitHubRepoURL"])}
+                      className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
+                      title="GitHub Repository"
+                    >
+                      <FaGithub className="text-white w-6 h-6" />
+                    </Link>
+                  )}
+                  {sectionItem["_id"] && (
+                    <Link
+                      href={`/projectDescription/${String(sectionItem["_id"])}`}
+                      className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
+                      title="View Project Description"
+                    >
+                      <BsFileText className="text-white w-6 h-6" />
+                    </Link>
+                  )}
                 </div>
               </div>
               <img
@@ -62,7 +78,7 @@ const Gallery = ({ sectionData, sectionName }: GalleryProps) => {
             {/* Text Content */}
             <div className="text-center pt-4">
               {Object.keys(sectionItem).map((prop, idx) => {
-                if (prop !== "imageURL" && !prop.includes("URL")) {
+                if (prop !== "imageURL" && prop !== "_id" && !prop.includes("URL")) {
                   return renderTextByProperty(
                     prop,
                     String(sectionItem[prop] || ""),
