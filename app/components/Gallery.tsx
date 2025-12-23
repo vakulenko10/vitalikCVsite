@@ -38,7 +38,7 @@ const Gallery = ({ sectionData, sectionName }: GalleryProps) => {
               {/* Overlay */}
               <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 z-10 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="flex gap-4">
-                  {sectionItem["projectURL"] && (
+                  {sectionItem["projectURL"] && String(sectionItem["projectURL"]).trim() !== "" ? (
                     <Link
                       target="_blank"
                       href={String(sectionItem["projectURL"])}
@@ -47,8 +47,8 @@ const Gallery = ({ sectionData, sectionName }: GalleryProps) => {
                     >
                       <BsFillEyeFill className="text-white w-6 h-6" />
                     </Link>
-                  )}
-                  {sectionItem["gitHubRepoURL"] && (
+                  ) : null}
+                  {sectionItem["gitHubRepoURL"] && String(sectionItem["gitHubRepoURL"]).trim() !== "" ? (
                     <Link
                       target="_blank"
                       href={String(sectionItem["gitHubRepoURL"])}
@@ -57,8 +57,8 @@ const Gallery = ({ sectionData, sectionName }: GalleryProps) => {
                     >
                       <FaGithub className="text-white w-6 h-6" />
                     </Link>
-                  )}
-                  {sectionItem["_id"] && (
+                  ) : null}
+                  {sectionItem["_id"] && String(sectionItem["_id"]).trim() !== "" ? (
                     <Link
                       href={`/projectDescription/${String(sectionItem["_id"])}`}
                       className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
@@ -66,7 +66,7 @@ const Gallery = ({ sectionData, sectionName }: GalleryProps) => {
                     >
                       <BsFileText className="text-white w-6 h-6" />
                     </Link>
-                  )}
+                  ) : null}
                 </div>
               </div>
               <img

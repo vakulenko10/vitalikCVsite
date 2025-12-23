@@ -4,9 +4,11 @@ import mongoose from "mongoose";
 
 export async function GET(req: NextRequest) {
   try {
-    console.log('Starting GET method');
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Starting GET method');
+    }
+    
     await connectMongoDB();
-    console.log('Connected to MongoDB');
 
     const db = mongoose.connection.db;
     if (!db) {
@@ -14,7 +16,10 @@ export async function GET(req: NextRequest) {
     }
 
     const collections = await db.listCollections().toArray();
-    console.log("collections", collections);
+    
+    if (process.env.NODE_ENV !== 'production') {
+      console.log("collections", collections);
+    }
     const data: Record<string, unknown[]> = {};
 
     for (const collectionInfo of collections) {

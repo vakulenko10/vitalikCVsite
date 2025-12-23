@@ -6,7 +6,9 @@ const connectMongoDB = async (): Promise<void> => {
             throw new Error('NEXT_PUBLIC_MONGODB_URI is not defined');
         }
         await mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI);
-        console.log("###################################################connected to mongodb");
+        if (process.env.NODE_ENV !== 'production') {
+          console.log("Connected to MongoDB");
+        }
     } catch (error) {
         console.log(error);
         throw error;

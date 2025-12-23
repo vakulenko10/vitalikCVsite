@@ -14,10 +14,12 @@ export async function GET(
 ) {
   try {
     const { sectionName } = await params;
-    console.log('Starting GET method');
+    
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Starting GET method');
+    }
+    
     await connectMongoDB();
-    console.log('Connected to MongoDB');
-    console.log("sectionName: ", sectionName);
     
     const db = mongoose.connection.db;
     if (!db) {
@@ -25,7 +27,10 @@ export async function GET(
     }
 
     const collections = await db.listCollections().toArray();
-    console.log("collections:", collections);
+    
+    if (process.env.NODE_ENV !== 'production') {
+      console.log("collections:", collections);
+    }
 
     const collectionNames = collections.map(collection => collection.name);
 
