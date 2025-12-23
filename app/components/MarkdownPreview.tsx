@@ -49,12 +49,21 @@ const MarkdownPreview = ({ content, className = "" }: MarkdownPreviewProps) => {
               {...props}
             />
           ),
-          img: ({ node, ...props }) => (
-            <img
-              className="rounded-lg shadow-md my-4 max-w-full h-auto"
-              {...props}
-            />
-          ),
+          img: ({ node, ...props }: any) => {
+            const { src, alt } = props;
+            return (
+              <img
+                src={src || ""}
+                alt={alt || "Image"}
+                className="rounded-lg shadow-md my-4 max-w-full h-auto"
+                loading="lazy"
+                onError={(e) => {
+                  console.error("Image failed to load:", src);
+                  (e.target as HTMLImageElement).style.display = "none";
+                }}
+              />
+            );
+          },
           code: ({ node, inline, ...props }: any) => {
             if (inline) {
               return (
