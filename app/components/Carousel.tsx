@@ -148,7 +148,7 @@ const Carousel = ({ sectionData, sectionName }: CarouselProps) => {
               >
                 <div className='w-full overflow-hidden text break-words flex flex-wrap flex-col md:justify-start md:items-start justify-between items-center pr-0 md:pr-4'>
                   {itemProps.map((prop, index) => {
-                    if (prop !== 'imageURL' && prop !== 'imageDate') {
+                    if (prop !== 'imageURL' && prop !== 'imageDate' && prop !== '_id') {
                       return (
                         renderTextByProperty(prop, String(item[prop] || ''), index, ` ${sectionName}`)
                       );

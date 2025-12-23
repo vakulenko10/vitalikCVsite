@@ -11,19 +11,23 @@ interface SectionItemProps {
 const SectionItem = ({ collectionName, item, index }: SectionItemProps) => {
   return (
     <div className={`flex flex-col`}>
-      {Object.keys(item).map((itemProperty, indexProp) => (
-        <div key={indexProp}>
-          {itemProperty === 'imageURL' ? (
-            <img
-              className={`w-[400px] h-auto`}
-              src={String(item[itemProperty] || "")}
-              alt={itemProperty}
-            />
-          ) : (
-            renderTextByProperty(itemProperty, String(item[itemProperty] || ""), indexProp)
-          )}
-        </div>
-      ))}
+      {Object.keys(item).map((itemProperty, indexProp) => {
+        if (itemProperty === '_id') return null;
+        
+        return (
+          <div key={indexProp}>
+            {itemProperty === 'imageURL' ? (
+              <img
+                className={`w-[400px] h-auto`}
+                src={String(item[itemProperty] || "")}
+                alt={itemProperty}
+              />
+            ) : (
+              renderTextByProperty(itemProperty, String(item[itemProperty] || ""), indexProp)
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };

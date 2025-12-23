@@ -33,7 +33,7 @@ const Accordion = ({ sectionData }: AccordionProps) => {
                 onClick={() => onItemClick(index)}
               >
                 {Object.keys(item).map((prop, idx) =>
-                  prop.includes('Question') && (
+                  prop.includes('Question') && prop !== '_id' && (
                     <h5 key={idx} className="text-lg font-semibold">
                       {String(item[prop])}
                     </h5>
@@ -52,7 +52,7 @@ const Accordion = ({ sectionData }: AccordionProps) => {
                   className="accordion-content bg-white py-4 px-6 border-b border-gray-300"
                 >
                   {Object.keys(item).map((prop, idx) =>
-                    prop.includes('Answer') && (
+                    prop.includes('Answer') && prop !== '_id' && (
                       <h3 key={idx} className="text-base">
                         {String(item[prop])}
                       </h3>

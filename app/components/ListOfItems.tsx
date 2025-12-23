@@ -22,8 +22,10 @@ const ListOfItems = ({ sectionData }: ListOfItemsProps) => {
             key={index}
             className='flex flex-col box-border w-[100px] items-center justify-end '
           >
-            {Object.keys(item).map((prop, ind) =>
-              prop === 'imageURL' ? (
+            {Object.keys(item).map((prop, ind) => {
+              if (prop === '_id') return null;
+              
+              return prop === 'imageURL' ? (
                 <motion.img
                   key={ind}
                   whileTap={{ rotate: "15deg", transition: { duration: 2 } }}
@@ -35,8 +37,8 @@ const ListOfItems = ({ sectionData }: ListOfItemsProps) => {
                 <h3 key={ind} className='text-black order-2 cursor-default'>
                   {String(item[prop] || "")}
                 </h3>
-              )
-            )}
+              );
+            })}
           </motion.div>
         ))}
       </motion.div>

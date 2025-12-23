@@ -45,12 +45,12 @@ const DefaultRenderComponent = ({ sectionData }: DefaultRenderComponentProps) =>
         {/* Render text data on the left side */}
         <div className='text py-10 '>
           {activeItemProps.map((prop, index) => {
-            if (prop !== 'imageURL') {
+            if (prop !== 'imageURL' && prop !== '_id') {
               return (
                 renderTextByProperty(prop, String(activeItem[prop] || ''), index, 'text-white welcome md:table ')
               );
             }
-            return null; // Skip rendering imageURL here
+            return null; // Skip rendering imageURL and _id here
           })}
         </div>
       </motion.div>
