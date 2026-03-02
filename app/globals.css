@@ -50,10 +50,9 @@
   scrollbar-width: none !important;
 }
 
+/* autoprefixer: off */
 .carousel::-webkit-scrollbar,
-.carousel *::-webkit-scrollbar,
-.carousel *::before::-webkit-scrollbar,
-.carousel *::after::-webkit-scrollbar {
+.carousel *::-webkit-scrollbar {
   display: none !important;
   width: 0 !important;
   height: 0 !important;
@@ -73,6 +72,7 @@
   display: none !important;
   background: transparent !important;
 }
+/* autoprefixer: on */
 
 /* Ensure carousel scroll container properly clips content */
 .carousel > div:first-of-type {

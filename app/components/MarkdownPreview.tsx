@@ -3,12 +3,19 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 
 interface MarkdownPreviewProps {
-  content: string;
+  content?: unknown;
   className?: string;
 }
 
 const MarkdownPreview = ({ content, className = "" }: MarkdownPreviewProps) => {
-  if (!content || content.trim() === "") {
+  const text =
+    typeof content === "string"
+      ? content
+      : content == null
+      ? ""
+      : JSON.stringify(content, null, 2);
+
+  if (!text.trim()) {
     return (
       <div className={`text-black italic ${className}`}>
         No content to display
@@ -105,11 +112,10 @@ const MarkdownPreview = ({ content, className = "" }: MarkdownPreviewProps) => {
           ),
         }}
       >
-        {content}
+        {text}
       </ReactMarkdown>
     </div>
   );
 };
 
 export default MarkdownPreview;
-

@@ -1,14 +1,39 @@
+"use client";
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView, PanInfo } from 'framer-motion';
 import { renderTextByProperty } from './mainconsts';
 import { FaCircle, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface CarouselProps {
-  sectionData: Record<string, unknown>[];
-  sectionName: string;
+  sectionData?: Record<string, unknown>[];
+  items?: Record<string, unknown>[];
+  data?: Record<string, unknown>[];
+  sectionName?: string;
+  title?: string;
+  name?: string;
 }
 
-const Carousel = ({ sectionData, sectionName }: CarouselProps) => {
+const Carousel = (props: CarouselProps) => {
+  const sectionDataRaw =
+    props.sectionData ??
+    props.items ??
+    props.data ??
+    [];
+
+  const sectionData: Record<string, unknown>[] = Array.isArray(sectionDataRaw)
+    ? sectionDataRaw
+    : [];
+
+  const sectionName =
+    props.sectionName ??
+    props.title ??
+    props.name ??
+    'items';
+
+  if (!sectionData.length) {
+    return null;
+  }
+
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(scrollContainerRef);

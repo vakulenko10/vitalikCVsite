@@ -8,11 +8,14 @@ import { BsFillEyeFill } from "react-icons/bs";
 import { BsFileText } from "react-icons/bs";
 
 interface GalleryProps {
-  sectionData: Record<string, unknown>[];
-  sectionName: string;
+  sectionData?: Record<string, unknown>[];
+  sectionName?: string;
 }
 
-const Gallery = ({ sectionData, sectionName }: GalleryProps) => {
+const Gallery = ({ sectionData = [], sectionName = "items" }: GalleryProps) => {
+  if (!Array.isArray(sectionData) || sectionData.length === 0) {
+    return null;
+  }
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref);
 

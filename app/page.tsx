@@ -1,11 +1,11 @@
-import Image from "next/image";
 import Sections from "./components/Sections";
+import AutoUIChatClient from "./components/AutoUIChatClient";
 
 export default function Home() {
   return (
-   <>
-   <Sections/>
-   
-   </>
+    <>
+      <Sections />
+      <AutoUIChatClient />
+    </>
   );
 }

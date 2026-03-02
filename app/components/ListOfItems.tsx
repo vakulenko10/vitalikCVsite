@@ -1,11 +1,13 @@
+ "use client";
+
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 interface ListOfItemsProps {
-  sectionData: Record<string, unknown>[];
+  sectionData?: Record<string, unknown>[];
 }
 
-const ListOfItems = ({ sectionData }: ListOfItemsProps) => {
+const ListOfItems = ({ sectionData = [] }: ListOfItemsProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref);
   

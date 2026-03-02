@@ -1,5 +1,7 @@
+import { withAutoUI } from '@autoai-ui/autoui/plugin';
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const baseConfig = {
   // Optimize images from external domains (Cloudinary, etc.)
   images: {
     remotePatterns: [
@@ -20,7 +22,15 @@ const nextConfig = {
   poweredByHeader: false,
   // Reduce bundle size
   swcMinify: true,
+  // Explicit Turbopack config to silence Next 16 warning
+  turbopack: {},
 };
+
+// Wrap the Next.js config with the AutoUI Next.js plugin
+const nextConfig = withAutoUI({
+  appId: 'portfolio_site_autoui_001',
+  version: '0.1.0',
+})(baseConfig);
 
 export default nextConfig;
 

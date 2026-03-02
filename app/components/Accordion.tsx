@@ -4,13 +4,15 @@ import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 interface AccordionProps {
-  sectionData: Record<string, unknown>[];
+  sectionData?: Record<string, unknown>[];
 }
 
-const Accordion = ({ sectionData }: AccordionProps) => {
+const Accordion = ({ sectionData = [] }: AccordionProps) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref);
+  // motion component refs expect a general Element type; using HTMLDivElement
+  // with a generic helps avoid mismatches later.
+  const ref = useRef<Element>(null);
+  const isInView = useInView(ref as React.RefObject<Element>);
   
   const onItemClick = (index: number) => {
     setActiveIndex(index === activeIndex ? null : index);
@@ -20,7 +22,7 @@ const Accordion = ({ sectionData }: AccordionProps) => {
     <AnimatePresence>
       <div className="min-h-full w-full flex justify-center items-center py-10">
         <motion.div
-          ref={ref}
+          ref={ref as React.RefObject<HTMLDivElement>}
           className="accordion w-full min-[350px]:w-[350px] md:w-[700px] max-w-lg rounded-[100px]"
           initial={{ x: -300 }}
           whileInView={{ x: 0 }}

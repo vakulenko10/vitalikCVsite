@@ -5,10 +5,14 @@ import { renderTextByProperty } from './mainconsts';
 import { easeInOut, motion } from 'framer-motion';
 
 interface DefaultRenderComponentProps {
-  sectionData: Record<string, unknown>[];
+  sectionData?: Record<string, unknown>[];
 }
 
-const DefaultRenderComponent = ({ sectionData }: DefaultRenderComponentProps) => {
+const DefaultRenderComponent = ({ sectionData = [] }: DefaultRenderComponentProps) => {
+  if (!Array.isArray(sectionData) || sectionData.length === 0) {
+    return null;
+  }
+
   const activeItem = sectionData[0];
   const activeItemProps = Object.keys(activeItem);
   
