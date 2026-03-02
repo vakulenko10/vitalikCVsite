@@ -1,0 +1,209 @@
+{
+  "appId": "app_1772479552034_wp9b4mk",
+  "version": "0.1.0",
+  "generatedAt": "2026-03-02T21:46:02.371Z",
+  "types": {
+    "string": {
+      "type": "primitive"
+    },
+    "string[]": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "refs": [
+        "string"
+      ]
+    },
+    "Anonymous_a9704f27": {
+      "type": "primitive"
+    },
+    "PortfolioItemForChat": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "required": false
+        },
+        "imageURL": {
+          "type": "string",
+          "required": false
+        },
+        "projectURL": {
+          "type": "string",
+          "required": false
+        },
+        "gitHubRepoURL": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "refs": [
+        "string"
+      ]
+    },
+    "PortfolioItemForChat[]": {
+      "type": "array",
+      "items": {
+        "type": "PortfolioItemForChat"
+      },
+      "refs": [
+        "PortfolioItemForChat"
+      ]
+    },
+    "Union_9fe724be": {
+      "type": "object",
+      "properties": {},
+      "refs": []
+    },
+    "Union_60bbab16": {
+      "type": "object",
+      "properties": {},
+      "refs": []
+    },
+    "Union_370ef115": {
+      "type": "object",
+      "properties": {},
+      "refs": []
+    },
+    "Array_11068bdc": {
+      "type": "object",
+      "properties": {
+        "then": {
+          "type": "Union_9fe724be",
+          "required": true
+        },
+        "catch": {
+          "type": "Union_60bbab16",
+          "required": true
+        },
+        "finally": {
+          "type": "Union_370ef115",
+          "required": true
+        }
+      },
+      "refs": [
+        "Union_9fe724be",
+        "Union_60bbab16",
+        "Union_370ef115"
+      ]
+    },
+    "Anonymous_60563d4b": {
+      "type": "primitive"
+    },
+    "Object_76325f0e": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "subtitle": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "required": true
+        },
+        "tags": {
+          "type": "string[]",
+          "required": true
+        },
+        "linkLabel": {
+          "type": "string",
+          "required": true
+        },
+        "linkHref": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "refs": [
+        "string",
+        "string[]"
+      ]
+    }
+  },
+  "components": [
+    {
+      "name": "AutoUIHighlightCard",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "subtitle": {
+          "type": "string",
+          "required": false
+        },
+        "description": {
+          "type": "string",
+          "required": false
+        },
+        "tags": {
+          "type": "string[]",
+          "required": false
+        },
+        "tone": {
+          "type": "Anonymous_a9704f27",
+          "required": false
+        },
+        "linkLabel": {
+          "type": "string",
+          "required": false
+        },
+        "linkHref": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "name": "AutoUIPortfolioList",
+      "props": {
+        "items": {
+          "type": "PortfolioItemForChat[]",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        }
+      }
+    }
+  ],
+  "functions": [
+    {
+      "name": "fetchPortfolioItems",
+      "params": {},
+      "returns": {
+        "type": "Array_11068bdc"
+      }
+    },
+    {
+      "name": "generateHighlightContent",
+      "params": {
+        "context": {
+          "type": "string",
+          "required": true
+        },
+        "tone": {
+          "type": "Anonymous_60563d4b",
+          "required": false
+        }
+      },
+      "returns": {
+        "type": "Object_76325f0e"
+      }
+    }
+  ]
+}

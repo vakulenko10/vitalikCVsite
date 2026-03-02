@@ -1,4 +1,4 @@
-import { withAutoUI } from '@autoai-ui/autoui/plugin';
+import { withAutoUI } from '@autoai-ui/autoui/nextjs';
 
 /** @type {import('next').NextConfig} */
 const baseConfig = {
@@ -30,6 +30,8 @@ const baseConfig = {
 const nextConfig = withAutoUI({
   appId: 'app_1772479552034_wp9b4mk',
   version: '0.1.0',
+  // Let the plugin/CLI write the schema to the project root
+  // (default path: ".autoui-runtime-schema.json")
 })(baseConfig);
 
 export default nextConfig;

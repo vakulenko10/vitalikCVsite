@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "autoui:schema": "autoui-nextjs-generate-schema --app-id app_1772479552034_wp9b4mk --version 0.1.0 --output .autoui-runtime-schema.json"
   },
   "dependencies": {
     "@autoai-ui/autoui": "^0.2.9",
