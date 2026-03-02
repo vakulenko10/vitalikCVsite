@@ -53,7 +53,7 @@ const proxyUrl = process.env.NEXT_PUBLIC_AUTOUI_PROXY_URL || '';
 const sharedSecret = process.env.NEXT_PUBLIC_AUTOUI_SHARED_SECRET || '';
 
 const autouiConfig: AutoUIConfig = {
-  appId: 'app_1772465748015_sw9niwa',
+  appId: 'app_1772479552034_wp9b4mk',
   metadata: {
     appName: 'Portfolio Site',
     appVersion: '0.1.0',

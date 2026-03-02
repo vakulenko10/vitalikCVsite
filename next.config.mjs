@@ -28,7 +28,7 @@ const baseConfig = {
 
 // Wrap the Next.js config with the AutoUI Next.js plugin
 const nextConfig = withAutoUI({
-  appId: 'portfolio_site_autoui_001',
+  appId: 'app_1772479552034_wp9b4mk',
   version: '0.1.0',
 })(baseConfig);
 
