@@ -12,7 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@autoai-ui/autoui": "^0.2.10",
+    "@autoai-ui/autoui": "^0.2.9",
     "framer-motion": "^12.34.4",
     "mongoose": "^8.2.1",
     "next": "^16.1.6",
