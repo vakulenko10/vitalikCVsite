@@ -1,7 +1,7 @@
 {
   "appId": "app_1772479552034_wp9b4mk",
   "version": "0.1.0",
-  "generatedAt": "2026-03-02T21:46:02.371Z",
+  "generatedAt": "2026-03-02T22:15:13.395Z",
   "types": {
     "string": {
       "type": "primitive"
@@ -44,10 +44,15 @@
         "gitHubRepoURL": {
           "type": "string",
           "required": false
+        },
+        "tags": {
+          "type": "string[]",
+          "required": false
         }
       },
       "refs": [
-        "string"
+        "string",
+        "string[]"
       ]
     },
     "PortfolioItemForChat[]": {
@@ -75,6 +80,40 @@
       "refs": []
     },
     "Array_11068bdc": {
+      "type": "object",
+      "properties": {
+        "then": {
+          "type": "Union_9fe724be",
+          "required": true
+        },
+        "catch": {
+          "type": "Union_60bbab16",
+          "required": true
+        },
+        "finally": {
+          "type": "Union_370ef115",
+          "required": true
+        }
+      },
+      "refs": [
+        "Union_9fe724be",
+        "Union_60bbab16",
+        "Union_370ef115"
+      ]
+    },
+    "Object_f17bdab1": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "refs": [
+        "string"
+      ]
+    },
+    "Union_a0bef202": {
       "type": "object",
       "properties": {
         "then": {
@@ -164,6 +203,10 @@
         "linkHref": {
           "type": "string",
           "required": false
+        },
+        "imageURL": {
+          "type": "string",
+          "required": false
         }
       }
     },
@@ -187,6 +230,30 @@
       "params": {},
       "returns": {
         "type": "Array_11068bdc"
+      }
+    },
+    {
+      "name": "filterPortfolioItemsByQuery",
+      "params": {
+        "params": {
+          "type": "Object_f17bdab1",
+          "required": true
+        }
+      },
+      "returns": {
+        "type": "Array_11068bdc"
+      }
+    },
+    {
+      "name": "fetchPortfolioProjectDetailsByQuery",
+      "params": {
+        "params": {
+          "type": "Object_f17bdab1",
+          "required": true
+        }
+      },
+      "returns": {
+        "type": "Union_a0bef202"
       }
     },
     {

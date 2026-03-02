@@ -4,7 +4,7 @@
 import { type AutoUIConfig } from '@autoai-ui/autoui';
 import AutoUIHighlightCard from './components/AutoUIHighlightCard';
 import AutoUIPortfolioList from './components/AutoUIPortfolioList';
-import { generateHighlightContent, fetchPortfolioItems, filterPortfolioItemsByQuery } from './autouiFunctions';
+import { generateHighlightContent, fetchPortfolioItems, filterPortfolioItemsByQuery, fetchPortfolioProjectDetailsByQuery } from './autouiFunctions';
 
 // Deprecated demo state and helper functions were removed to keep AutoUI focused
 // on a single, rich highlight card experience inside the chat.
@@ -27,7 +27,7 @@ const autouiConfig: AutoUIConfig = {
     proxyUrl,
     sharedSecret,
     appDescriptionPrompt:
-      'You are an AI assistant for the portfolio website. You speak for Vitalik Vakulenko but always say you are an AI assistant. When the user asks to see portfolio projects or list of projects: (1) call fetchPortfolioItems() first (no params), (2) assign the result to a variable, (3) render AutoUIPortfolioList with props: { items: <that variable> }. When the user asks for a specific kind of project (for example "AI", "calorie intake", "admin panel"), prefer calling filterPortfolioItemsByQuery({ query: "<their words>" }) and then render AutoUIPortfolioList with the filtered items. For a single highlight use generateHighlightContent then AutoUIHighlightCard—always pass a non-empty "title" to AutoUIHighlightCard.',
+      'You are an AI assistant for the portfolio website. You speak for Vitalik Vakulenko but always say you are an AI assistant. When the user asks to see portfolio projects or list of projects: (1) call fetchPortfolioItems() first (no params), (2) assign the result to a variable, (3) render AutoUIPortfolioList with props: { items: <that variable> }. When the user asks for a specific kind of project (for example "AI", "calorie intake", "admin panel"), prefer calling filterPortfolioItemsByQuery({ query: "<their words>" }) and then render AutoUIPortfolioList with the filtered items. When the user asks detailed questions about how a specific project relates to AI or how it works, first call fetchPortfolioProjectDetailsByQuery({ query: "<their words>" }) and use the returned detailsMarkdown + description to write a direct natural-language answer, then optionally render AutoUIHighlightCard for that project. Always include a clear textual answer, not only UI components. For a generic single highlight you can still use generateHighlightContent then AutoUIHighlightCard—always pass a non-empty "title" to AutoUIHighlightCard.',
     temperature: 0.2,
     maxTokens: 1500,
   },
@@ -51,8 +51,14 @@ const autouiConfig: AutoUIConfig = {
     },
     filterPortfolioItemsByQuery: {
       prompt:
-        'Filter portfolio projects by a natural-language query, for example "AI", "calorie intake", "Next.js". Use this when the user asks for a specific kind of project. It returns only items whose title, description, or tags match the query. After calling this, render AutoUIPortfolioList with the returned items.',
+        'Filter portfolio projects by a natural-language query, for example "AI", "typescript", "Next.js". Use this when the user asks for a specific kind of project. It returns only items whose title, description, or tags match the query. After calling this, render AutoUIPortfolioList with the returned items.',
       callFunc: filterPortfolioItemsByQuery,
+      canShareDataWithLLM: true,
+    },
+    fetchPortfolioProjectDetailsByQuery: {
+      prompt:
+        'Fetch rich details for the portfolio project that best matches a natural-language query. Returns title, short description, and long markdown content from the project-descriptions collection. Use this when the user asks questions like "how does this website relate to AI?" or "explain this project in more depth". Use the returned detailsMarkdown and description to answer in text, and optionally render AutoUIHighlightCard using the same title/description/tags.',
+      callFunc: fetchPortfolioProjectDetailsByQuery,
       canShareDataWithLLM: true,
     },
     generateHighlightContent: {
@@ -73,11 +79,11 @@ const autouiConfig: AutoUIConfig = {
     },
     AutoUIHighlightCard: {
       prompt:
-        'A single highlight card for one project or topic. Always pass "title" (required). Optional: subtitle, description, tags, linkLabel, linkHref.',
+        'A single, beautiful highlight card for one project or topic. Pass "title" (main heading). Optional: subtitle, description, tags (e.g. ["AI", "Next.js"]), linkLabel, linkHref (e.g. /projectDescription/<id>), imageURL (project thumbnail). Use for focused, data-rich highlights.',
       callComponent: AutoUIHighlightCard,
       category: 'display',
       exampleUsage:
-        '<AutoUIHighlightCard title="Featured project" subtitle="Next.js + TypeScript" description="Short explanation." tags={["Next.js", "Portfolio"]} linkLabel="Open project" linkHref="/projectDescription/123" />',
+        '<AutoUIHighlightCard title="AI integration in SMM Website" subtitle="Custom tool for AI chat" description="Explaining the connection between AI and social media management." tags={["AI", "Portfolio"]} linkLabel="View project" linkHref="/projectDescription/abc123" imageURL="https://..." />',
     },
   },
 };

@@ -64,6 +64,64 @@ export async function filterPortfolioItemsByQuery(params: {
 
 autouiRegisterFunctionParamsSchema(filterPortfolioItemsByQuery);
 
+export interface PortfolioProjectDetailsForChat {
+  id: string;
+  title: string;
+  description?: string;
+  /** Long-form markdown description from the project-descriptions collection (any language). */
+  detailsMarkdown?: string;
+}
+
+/**
+ * Find the portfolio project that best matches a natural-language query (\"AI\", \"calorie intake\", etc.)
+ * and return both the short description and the long markdown content.
+ *
+ * Use this when the user asks questions like \"how does this website relate to AI?\".
+ */
+export async function fetchPortfolioProjectDetailsByQuery(params: {
+  query: string;
+}): Promise<PortfolioProjectDetailsForChat | null> {
+  const query = params.query.trim();
+  const filtered = await filterPortfolioItemsByQuery({ query });
+  const all = filtered.length ? filtered : await fetchPortfolioItems();
+  const best = all[0];
+  if (!best) return null;
+
+  let detailsMarkdown: string | undefined;
+  try {
+    const res = await fetch(`/api/project-descriptions/portfolio/${best.id}`);
+    if (res.ok) {
+      const json = (await res.json()) as {
+        success?: boolean;
+        data?: {
+          enMarkdownContent?: string;
+          uaMarkdownContent?: string;
+          plMarkdownContent?: string;
+        };
+      };
+      const data = json.data;
+      if (data) {
+        detailsMarkdown =
+          data.enMarkdownContent ||
+          data.uaMarkdownContent ||
+          data.plMarkdownContent ||
+          undefined;
+      }
+    }
+  } catch {
+    // If description fetch fails, we still return basic project info.
+  }
+
+  return {
+    id: best.id,
+    title: best.title,
+    description: best.description,
+    detailsMarkdown,
+  };
+}
+
+autouiRegisterFunctionParamsSchema(fetchPortfolioProjectDetailsByQuery);
+
 type HighlightTone = "friendly" | "confident" | "detailed";
 
 export function generateHighlightContent({

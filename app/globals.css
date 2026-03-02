@@ -268,6 +268,34 @@ button{
   scrollbar-width: thin;
   scrollbar-color: rgb(150, 150, 150) rgb(0, 0, 0);
 }
+
+/* ==== AutoUI chat theming ==== */
+/* User messages: use site orange, only for user bubbles */
+.autoui-chat-message.user .autoui-chat-bubble {
+  background-color: #F2C18D !important;
+  color: #1f2937 !important;
+}
+.autoui-chat-message.user .autoui-chat-bubble p,
+.autoui-chat-message.user .autoui-chat-bubble span,
+.autoui-chat-message.user .autoui-chat-bubble div {
+  color: #1f2937 !important;
+}
+
+/* Chat open (floating) button styled with site palette */
+.autoui-chat-open-btn {
+  background: #ffffff !important;
+  color: #1f2937 !important;
+  border-color: #A5DD9B !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25) !important;
+}
+.autoui-chat-open-btn:hover {
+  background: #F6F193 !important;
+  transform: translateY(-2px);
+}
+.autoui-chat-open-btn:active {
+  background: #ffffff !important;
+  transform: translateY(0);
+}
 .welcome h2{
   font-size: 3rem;
 }
