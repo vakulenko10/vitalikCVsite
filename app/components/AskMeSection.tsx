@@ -3,8 +3,8 @@
 import React, { useCallback } from "react";
 import Container from "./Container";
 
-// Start with a slightly deeper green for better contrast with white titles.
-const STRIPE_COLORS = ["#A5DD9B", "#C5EBAA", "#F6F193", "#F2C18D"] as const;
+// Single color so section looks solid; stripes exist only for play-background animation.
+const SECTION_BG_COLOR = "#A5DD9B";
 const STRIPE_COUNT = 4;
 
 const PREDEFINED_QUESTIONS = [
@@ -30,25 +30,21 @@ function useAskChat() {
 }
 
 export default function AskMeSection() {
-  const stripes = Array.from(
-    { length: STRIPE_COUNT },
-    (_, i) => STRIPE_COLORS[i % STRIPE_COLORS.length]
-  );
   const sendToChat = useAskChat();
 
   return (
     <section
       id="ask-me"
       className="relative min-h-[100vh] w-full overflow-hidden py-16 md:py-24"
-      style={{ background: stripes[0] }}
+      style={{ background: SECTION_BG_COLOR }}
     >
-      {/* Stripe background — same scale as other sections (4 big stripes) */}
+      {/* Stripe background — one color; stripes only for play-background animation */}
       <div className="absolute inset-0 z-0 flex flex-col">
-        {stripes.map((color, i) => (
+        {Array.from({ length: STRIPE_COUNT }, (_, i) => (
           <div
             key={i}
             className="h-1/4 w-full site-stripe"
-            style={{ backgroundColor: color }}
+            style={{ backgroundColor: SECTION_BG_COLOR }}
           />
         ))}
       </div>
