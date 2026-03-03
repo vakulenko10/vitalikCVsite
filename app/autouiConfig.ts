@@ -1,10 +1,25 @@
 // AutoUI configuration for the portfolio site
-// This file maps a single, highly-styled component and one helper function
-// that the AutoUI assistant can use inside the chat.
 import { type AutoUIConfig } from '@autoai-ui/autoui';
 import AutoUIHighlightCard from './components/AutoUIHighlightCard';
 import AutoUIPortfolioList from './components/AutoUIPortfolioList';
-import { generateHighlightContent, fetchPortfolioItems, filterPortfolioItemsByQuery, fetchPortfolioProjectDetailsByQuery } from './autouiFunctions';
+import AutoUIPlayBackgroundButton from './components/AutoUIPlayBackgroundButton';
+import AutoUISocialLinks from './components/AutoUISocialLinks';
+import AutoUIBestProjectCard from './components/AutoUIBestProjectCard';
+import AutoUITechStackCard from './components/AutoUITechStackCard';
+import AutoUIDifferentiatorsCard from './components/AutoUIDifferentiatorsCard';
+import AutoUIHireMeForm from './components/AutoUIHireMeForm';
+import AutoUIProblemsExciteCard from './components/AutoUIProblemsExciteCard';
+import {
+  generateHighlightContent,
+  fetchPortfolioItems,
+  filterPortfolioItemsByQuery,
+  fetchPortfolioProjectDetailsByQuery,
+  getSocialLinks,
+  getBestProject,
+  getTechStackAndGoals,
+  getWhatMakesMeDifferent,
+  getProblemsThatExciteMe,
+} from './autouiFunctions';
 
 // Deprecated demo state and helper functions were removed to keep AutoUI focused
 // on a single, rich highlight card experience inside the chat.
@@ -27,7 +42,7 @@ const autouiConfig: AutoUIConfig = {
     proxyUrl,
     sharedSecret,
     appDescriptionPrompt:
-      'You are an AI assistant for the portfolio website. You speak for Vitalik Vakulenko but always say you are an AI assistant. When the user asks to see portfolio projects or list of projects: (1) call fetchPortfolioItems() first (no params), (2) assign the result to a variable, (3) render AutoUIPortfolioList with props: { items: <that variable> }. When the user asks for a specific kind of project (for example "AI", "calorie intake", "admin panel"), prefer calling filterPortfolioItemsByQuery({ query: "<their words>" }) and then render AutoUIPortfolioList with the filtered items. When the user asks detailed questions about how a specific project relates to AI or how it works, first call fetchPortfolioProjectDetailsByQuery({ query: "<their words>" }) and use the returned detailsMarkdown + description to write a direct natural-language answer, then optionally render AutoUIHighlightCard for that project. Always include a clear textual answer, not only UI components. For a generic single highlight you can still use generateHighlightContent then AutoUIHighlightCard—always pass a non-empty "title" to AutoUIHighlightCard.',
+      'You are an AI assistant for Vitalik Vakulenko\'s portfolio. Always say you are an AI assistant. Use the following rules. (1) Social medias: when asked about social medias, links, GitHub, LinkedIn, or phone, render AutoUISocialLinks with no props — it always uses Vitalik\'s real profiles; you can optionally call getSocialLinks() if you want to mention the URLs in text. (2) Best project / proud project: when asked about the best project or what Vitalik is proud of, call getBestProject() and render AutoUIBestProjectCard with the returned object (title, subtitle, description, points, tags, npmUrl, repoUrl). (3) Tech stack and future goals: when asked about tech stack, what he wants to learn, or future goals, call getTechStackAndGoals() and render AutoUITechStackCard with the returned object; also answer in text: JavaScript, TypeScript, React, Next.js; interest in AI integrations and generative UI; interest in OOP (C#, Java, C++), already strong in OOP; open to any propositions; wants to study DevOps and CI/CD in depth. (4) What makes Vitalik different: call getWhatMakesMeDifferent() and render AutoUIDifferentiatorsCard with { points }. (5) Why hire me / company-specific: render AutoUIHireMeForm so the user can submit their company name and optional description; the form will send a new message to you to generate a tailored answer. (6) Problems that excite: call getProblemsThatExciteMe() and render AutoUIProblemsExciteCard with the returned { intro, points, quote }; keep the tone smart but not complex. (7) Play site background: when the user asks to play or animate the site background, render AutoUIPlayBackgroundButton. (8) Portfolio list and highlights: use fetchPortfolioItems, filterPortfolioItemsByQuery, fetchPortfolioProjectDetailsByQuery, AutoUIPortfolioList, AutoUIHighlightCard, generateHighlightContent as before. Always give a short textual reply in addition to components when it helps.',
     temperature: 0.2,
     maxTokens: 1500,
   },
@@ -67,6 +82,31 @@ const autouiConfig: AutoUIConfig = {
       callFunc: generateHighlightContent,
       canShareDataWithLLM: true,
     },
+    getSocialLinks: {
+      prompt: 'Returns Vitalik\'s social links: github, linkedin, phone. Use when you want to mention exact URLs in text. AutoUISocialLinks does not need props and will always show the correct profiles.',
+      callFunc: getSocialLinks,
+      canShareDataWithLLM: true,
+    },
+    getBestProject: {
+      prompt: 'Returns structured data about the best project (AutoUI NPM library with 3 friends, university project). Use when asked about best project or what Vitalik is proud of. Then render AutoUIBestProjectCard with the result.',
+      callFunc: getBestProject,
+      canShareDataWithLLM: true,
+    },
+    getTechStackAndGoals: {
+      prompt: 'Returns tech stack (JavaScript, TypeScript, React, Next.js), interests, OOP note, openness, DevOps note. Use when asked about tech stack or future goals. Then render AutoUITechStackCard with the result.',
+      callFunc: getTechStackAndGoals,
+      canShareDataWithLLM: true,
+    },
+    getWhatMakesMeDifferent: {
+      prompt: 'Returns points that make Vitalik different from other developers. Use when asked "what makes you/me different". Then render AutoUIDifferentiatorsCard with { points }.',
+      callFunc: getWhatMakesMeDifferent,
+      canShareDataWithLLM: true,
+    },
+    getProblemsThatExciteMe: {
+      prompt: 'Returns intro, points, and optional quote about problems that excite Vitalik (growth, weak sides, learning). Use when asked what kind of problems excite him. Then render AutoUIProblemsExciteCard with the result.',
+      callFunc: getProblemsThatExciteMe,
+      canShareDataWithLLM: true,
+    },
   },
   components: {
     AutoUIPortfolioList: {
@@ -79,11 +119,53 @@ const autouiConfig: AutoUIConfig = {
     },
     AutoUIHighlightCard: {
       prompt:
-        'A single, beautiful highlight card for one project or topic. Pass "title" (main heading). Optional: subtitle, description, tags (e.g. ["AI", "Next.js"]), linkLabel, linkHref (e.g. /projectDescription/<id>), imageURL (project thumbnail). Use for focused, data-rich highlights.',
+        'A single, beautiful highlight card for one project or topic. Pass "title" (main heading). Optional: subtitle, description, tags, linkLabel, linkHref, imageURL.',
       callComponent: AutoUIHighlightCard,
       category: 'display',
       exampleUsage:
-        '<AutoUIHighlightCard title="AI integration in SMM Website" subtitle="Custom tool for AI chat" description="Explaining the connection between AI and social media management." tags={["AI", "Portfolio"]} linkLabel="View project" linkHref="/projectDescription/abc123" imageURL="https://..." />',
+        '<AutoUIHighlightCard title="AI integration" description="..." tags={["AI"]} />',
+    },
+    AutoUISocialLinks: {
+      prompt: 'Beautiful card with links to GitHub, LinkedIn, and phone. It takes no props; it always uses Vitalik\'s real profiles from the site. Use it when the user asks for social medias or contact links.',
+      callComponent: AutoUISocialLinks,
+      category: 'display',
+      exampleUsage: '<AutoUISocialLinks />',
+    },
+    AutoUIBestProjectCard: {
+      prompt: 'Card about the best project (AutoUI). Pass: title, subtitle, description, points (string[]), tags (string[]), optional npmUrl, repoUrl. Get data from getBestProject().',
+      callComponent: AutoUIBestProjectCard,
+      category: 'display',
+      exampleUsage: '<AutoUIBestProjectCard {...getBestProject()} />',
+    },
+    AutoUITechStackCard: {
+      prompt: 'Card for tech stack and future goals. Pass: techStack, interests, oopNote, openTo, devOpsNote. Get data from getTechStackAndGoals().',
+      callComponent: AutoUITechStackCard,
+      category: 'display',
+      exampleUsage: '<AutoUITechStackCard {...getTechStackAndGoals()} />',
+    },
+    AutoUIDifferentiatorsCard: {
+      prompt: 'Card "what makes Vitalik different". Pass: points (string[]). Get data from getWhatMakesMeDifferent().',
+      callComponent: AutoUIDifferentiatorsCard,
+      category: 'display',
+      exampleUsage: '<AutoUIDifferentiatorsCard points={getWhatMakesMeDifferent().points} />',
+    },
+    AutoUIHireMeForm: {
+      prompt: 'Form for "why hire me for your company": user enters company name (required) and optional description. On submit it sends a message to the AI to get a tailored answer. Optional prop: title.',
+      callComponent: AutoUIHireMeForm,
+      category: 'input',
+      exampleUsage: '<AutoUIHireMeForm />',
+    },
+    AutoUIProblemsExciteCard: {
+      prompt: 'Card about problems that excite Vitalik. Pass: intro, points (string[]), optional quote. Get data from getProblemsThatExciteMe().',
+      callComponent: AutoUIProblemsExciteCard,
+      category: 'display',
+      exampleUsage: '<AutoUIProblemsExciteCard {...getProblemsThatExciteMe()} />',
+    },
+    AutoUIPlayBackgroundButton: {
+      prompt: 'Button that when clicked plays the whole site background stripe animation for 10 seconds. Use when user asks to play or animate the site background.',
+      callComponent: AutoUIPlayBackgroundButton,
+      category: 'display',
+      exampleUsage: '<AutoUIPlayBackgroundButton />',
     },
   },
 };

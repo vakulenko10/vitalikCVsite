@@ -1,7 +1,7 @@
 {
   "appId": "app_1772479552034_wp9b4mk",
   "version": "0.1.0",
-  "generatedAt": "2026-03-02T22:15:13.395Z",
+  "generatedAt": "2026-03-03T16:58:07.097Z",
   "types": {
     "string": {
       "type": "primitive"
@@ -170,9 +170,170 @@
         "string",
         "string[]"
       ]
+    },
+    "SocialLinksData": {
+      "type": "object",
+      "properties": {
+        "github": {
+          "type": "string",
+          "required": true
+        },
+        "linkedin": {
+          "type": "string",
+          "required": true
+        },
+        "phone": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "refs": [
+        "string"
+      ]
+    },
+    "BestProjectData": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "subtitle": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "required": true
+        },
+        "points": {
+          "type": "string[]",
+          "required": true
+        },
+        "tags": {
+          "type": "string[]",
+          "required": true
+        },
+        "npmUrl": {
+          "type": "string",
+          "required": false
+        },
+        "repoUrl": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "refs": [
+        "string",
+        "string[]"
+      ]
+    },
+    "TechStackAndGoalsData": {
+      "type": "object",
+      "properties": {
+        "techStack": {
+          "type": "string[]",
+          "required": true
+        },
+        "interests": {
+          "type": "string[]",
+          "required": true
+        },
+        "oopNote": {
+          "type": "string",
+          "required": true
+        },
+        "openTo": {
+          "type": "string",
+          "required": true
+        },
+        "devOpsNote": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "refs": [
+        "string[]",
+        "string"
+      ]
+    },
+    "DifferentiatorData": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "string[]",
+          "required": true
+        }
+      },
+      "refs": [
+        "string[]"
+      ]
+    },
+    "ProblemsExciteMeData": {
+      "type": "object",
+      "properties": {
+        "intro": {
+          "type": "string",
+          "required": true
+        },
+        "points": {
+          "type": "string[]",
+          "required": true
+        },
+        "quote": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "refs": [
+        "string",
+        "string[]"
+      ]
     }
   },
   "components": [
+    {
+      "name": "AutoUIBestProjectCard",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "subtitle": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "required": true
+        },
+        "points": {
+          "type": "string[]",
+          "required": true
+        },
+        "tags": {
+          "type": "string[]",
+          "required": true
+        },
+        "npmUrl": {
+          "type": "string",
+          "required": false
+        },
+        "repoUrl": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "name": "AutoUIDifferentiatorsCard",
+      "props": {
+        "points": {
+          "type": "string[]",
+          "required": false
+        }
+      }
+    },
     {
       "name": "AutoUIHighlightCard",
       "props": {
@@ -211,6 +372,24 @@
       }
     },
     {
+      "name": "AutoUIHireMeForm",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "name": "AutoUIPlayBackgroundButton",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
       "name": "AutoUIPortfolioList",
       "props": {
         "items": {
@@ -218,6 +397,52 @@
           "required": true
         },
         "title": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "name": "AutoUIProblemsExciteCard",
+      "props": {
+        "intro": {
+          "type": "string",
+          "required": false
+        },
+        "points": {
+          "type": "string[]",
+          "required": false
+        },
+        "quote": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "name": "AutoUISocialLinks",
+      "props": {}
+    },
+    {
+      "name": "AutoUITechStackCard",
+      "props": {
+        "techStack": {
+          "type": "string[]",
+          "required": false
+        },
+        "interests": {
+          "type": "string[]",
+          "required": false
+        },
+        "oopNote": {
+          "type": "string",
+          "required": false
+        },
+        "openTo": {
+          "type": "string",
+          "required": false
+        },
+        "devOpsNote": {
           "type": "string",
           "required": false
         }
@@ -270,6 +495,41 @@
       },
       "returns": {
         "type": "Object_76325f0e"
+      }
+    },
+    {
+      "name": "getSocialLinks",
+      "params": {},
+      "returns": {
+        "type": "SocialLinksData"
+      }
+    },
+    {
+      "name": "getBestProject",
+      "params": {},
+      "returns": {
+        "type": "BestProjectData"
+      }
+    },
+    {
+      "name": "getTechStackAndGoals",
+      "params": {},
+      "returns": {
+        "type": "TechStackAndGoalsData"
+      }
+    },
+    {
+      "name": "getWhatMakesMeDifferent",
+      "params": {},
+      "returns": {
+        "type": "DifferentiatorData"
+      }
+    },
+    {
+      "name": "getProblemsThatExciteMe",
+      "params": {},
+      "returns": {
+        "type": "ProblemsExciteMeData"
       }
     }
   ]

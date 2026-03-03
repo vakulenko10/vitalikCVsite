@@ -281,6 +281,37 @@ button{
   color: #1f2937 !important;
 }
 
+/* Assistant messages: use site green/yellow palette */
+.autoui-chat-message.assistant .autoui-chat-bubble {
+  background-color: #C5EBAA !important;
+  color: #1f2937 !important;
+}
+.autoui-chat-message.assistant .autoui-chat-bubble p,
+.autoui-chat-message.assistant .autoui-chat-bubble span,
+.autoui-chat-message.assistant .autoui-chat-bubble div {
+  color: #1f2937 !important;
+}
+
+/* Chat input textbox styling, especially for dark mode */
+.autoui-chat-textbox {
+  background-color: #111827 !important; /* dark slate */
+  color: #F9FAFB !important;           /* near-white text */
+  border-color: #4B5563 !important;
+}
+.autoui-chat-textbox::placeholder {
+  color: #9CA3AF !important;
+}
+
+/* Chat loading spinner dots and spinners in site palette */
+.spinner-dot,
+.spinner-simple-circle1,
+.spinner-simple-circle2,
+.spinner-bar {
+  background-color: #A5DD9B !important;
+  color: #A5DD9B !important;
+  border-color: #A5DD9B !important;
+}
+
 /* Chat open (floating) button styled with site palette */
 .autoui-chat-open-btn {
   background: #ffffff !important;

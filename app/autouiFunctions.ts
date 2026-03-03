@@ -157,3 +157,123 @@ export function generateHighlightContent({
 
 autouiRegisterFunctionParamsSchema(generateHighlightContent);
 
+// --- Predefined Q&A data (used by components / AI) ---
+
+export interface SocialLinksData {
+  github: string;
+  linkedin: string;
+  phone: string;
+}
+
+export function getSocialLinks(): SocialLinksData {
+  return {
+    github:
+      typeof process !== "undefined" && process.env?.NEXT_PUBLIC_GITHUB_URL
+        ? process.env.NEXT_PUBLIC_GITHUB_URL
+        : "https://github.com",
+    linkedin:
+      typeof process !== "undefined" && process.env?.NEXT_PUBLIC_LINKEDIN_URL
+        ? process.env.NEXT_PUBLIC_LINKEDIN_URL
+        : "https://linkedin.com/in",
+    phone:
+      typeof process !== "undefined" && process.env?.NEXT_PUBLIC_PHONE
+        ? process.env.NEXT_PUBLIC_PHONE
+        : "+1 234 567 8900",
+  };
+}
+
+autouiRegisterFunctionParamsSchema(getSocialLinks);
+
+export interface BestProjectData {
+  title: string;
+  subtitle: string;
+  description: string;
+  points: string[];
+  tags: string[];
+  npmUrl?: string;
+  repoUrl?: string;
+}
+
+export function getBestProject(): BestProjectData {
+  return {
+    title: "AutoUI — Generative UI library",
+    subtitle: "NPM library built with 3 friends as a university implementation project",
+    description:
+      "A generative UI library published on NPM. I didn't only write core logic: I came up with the idea of building a generative UI library, planned sprints, and divided tasks for each team member. We delivered a working NPM package as our implementation project for university studies.",
+    points: [
+      "Originated the idea of a generative UI library and drove the project vision.",
+      "Planned sprints and split tasks across the team (4 members).",
+      "Implemented core logic and library architecture.",
+      "Shipped as a published NPM package used in real projects.",
+    ],
+    tags: ["NPM", "Generative UI", "React", "Team lead", "University project"],
+    npmUrl: "https://www.npmjs.com/package/@autoai-ui/autoui",
+    repoUrl: "https://github.com",
+  };
+}
+
+autouiRegisterFunctionParamsSchema(getBestProject);
+
+export interface TechStackAndGoalsData {
+  techStack: string[];
+  interests: string[];
+  oopNote: string;
+  openTo: string;
+  devOpsNote: string;
+}
+
+export function getTechStackAndGoals(): TechStackAndGoalsData {
+  return {
+    techStack: ["JavaScript", "TypeScript", "React", "Next.js"],
+    interests: [
+      "AI integrations",
+      "Generative UI",
+      "OOP languages (C#, Java, C++) — already strong in OOP, eager to go deeper.",
+    ],
+    oopNote: "I'm already really good at OOP and would love to work more with C#, Java, or C++.",
+    openTo: "I'm open to any kind of propositions.",
+    devOpsNote: "I would also like to study DevOps and CI/CD in depth.",
+  };
+}
+
+autouiRegisterFunctionParamsSchema(getTechStackAndGoals);
+
+export interface DifferentiatorData {
+  points: string[];
+}
+
+export function getWhatMakesMeDifferent(): DifferentiatorData {
+  return {
+    points: [
+      "I combine product thinking with code: I don't just implement specs — I propose ideas (e.g. AutoUI) and break them into deliverable tasks.",
+      "I care about ownership: from planning sprints to shipping on NPM, I take responsibility for outcomes.",
+      "I'm comfortable in both front-end and conceptual work (architecture, APIs, generative UI), and I keep learning (AI, DevOps, CI/CD).",
+      "I work well in teams: I've led small teams, divided work clearly, and shipped a real library with friends.",
+    ],
+  };
+}
+
+autouiRegisterFunctionParamsSchema(getWhatMakesMeDifferent);
+
+export interface ProblemsExciteMeData {
+  intro: string;
+  points: string[];
+  quote?: string;
+}
+
+export function getProblemsThatExciteMe(): ProblemsExciteMeData {
+  return {
+    intro:
+      "I'm excited by problems that expose my weak sides so I can turn them into strengths. I like challenges that force me to learn and to collaborate.",
+    points: [
+      "Finding gaps in my own knowledge so I can systematically improve.",
+      "Designing systems that are simple for users but robust under the hood.",
+      "Working with others who push me to explain my choices and refine my ideas.",
+    ],
+    quote:
+      "The best way to grow is to run toward what you don't yet know.",
+  };
+}
+
+autouiRegisterFunctionParamsSchema(getProblemsThatExciteMe);
+

@@ -46,7 +46,7 @@ const LinksContainer = ({ isSmallHeaderActive, setIsSmallHeaderActive }: LinksCo
             href={`#${link}`} 
             className={` text-[30px] md:text-[20px] transition duration-200 ease-linear ${isSmallHeaderActive ? `md:bg-transparent p-5 hover:bg-[#fafafa9e] md:hover:bg-transparent md:hover:text-[#ffffffec] md:p-0 ` : `md:hover:text-[#ffffff80]`}`}
           >
-            {link}
+            {link.charAt(0).toUpperCase() + link.slice(1)}
           </Link>
         ))}
       </ul>
