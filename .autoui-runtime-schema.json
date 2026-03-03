@@ -1,7 +1,7 @@
 {
   "appId": "app_1772479552034_wp9b4mk",
   "version": "0.1.0",
-  "generatedAt": "2026-03-03T16:58:07.097Z",
+  "generatedAt": "2026-03-03T23:11:55.021Z",
   "types": {
     "string": {
       "type": "primitive"
@@ -289,6 +289,33 @@
         "string",
         "string[]"
       ]
+    },
+    "Anonymous_461d31b1": {
+      "type": "primitive"
+    },
+    "Object_3d2b82a9": {
+      "type": "object",
+      "properties": {
+        "targetLanguage": {
+          "type": "Anonymous_461d31b1",
+          "required": false
+        }
+      },
+      "refs": [
+        "Anonymous_461d31b1"
+      ]
+    },
+    "Object_b04599c6": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "refs": [
+        "string"
+      ]
     }
   },
   "components": [
@@ -397,6 +424,19 @@
           "required": true
         },
         "title": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "name": "AutoUIPortfolioPDFDownload",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "subtitle": {
           "type": "string",
           "required": false
         }
@@ -530,6 +570,18 @@
       "params": {},
       "returns": {
         "type": "ProblemsExciteMeData"
+      }
+    },
+    {
+      "name": "toggleSiteLanguage",
+      "params": {
+        "params": {
+          "type": "Object_3d2b82a9",
+          "required": false
+        }
+      },
+      "returns": {
+        "type": "Object_b04599c6"
       }
     }
   ]

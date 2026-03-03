@@ -14,6 +14,8 @@ const PREDEFINED_QUESTIONS = [
   "What makes you different from other developers?",
   "Why should you hire me? (for your specific company)",
   "What kind of problems excite you?",
+  "Where can I download your portfolio (PDF)?",
+  "Show CV",
   "Play the site background animation",
 ];
 
