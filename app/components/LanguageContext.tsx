@@ -1,5 +1,5 @@
 "use client"
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 interface LanguageContextType {
   language: string;
@@ -22,6 +22,33 @@ interface LanguageProviderProps {
 
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const [language, setLanguage] = useState<string>('en'); // Default language is English
+
+  // Listen for AutoUI-triggered language changes from the chat
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<{ target?: string; cycle?: boolean }>).detail;
+      const supported = ['en', 'ua', 'pl'] as const;
+      if (detail?.target && supported.includes(detail.target as any)) {
+        setLanguage(detail.target);
+        return;
+      }
+      // cycle through languages if no explicit target provided
+      setLanguage((prev) => {
+        const idx = supported.indexOf(prev as any);
+        const nextIndex = idx === -1 ? 0 : (idx + 1) % supported.length;
+        return supported[nextIndex];
+      });
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('autoui-toggle-language', handler as EventListener);
+    }
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('autoui-toggle-language', handler as EventListener);
+      }
+    };
+  }, []);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>

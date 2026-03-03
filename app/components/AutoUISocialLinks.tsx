@@ -60,8 +60,8 @@ const AutoUISocialLinks: React.FC = () => {
             }}
           >
             <span
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-white overflow-hidden"
-              style={{ backgroundColor: label === "GitHub" ? "#ffffff" : PALETTE.green }}
+              className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center overflow-hidden bg-white"
+              style={{ border: "1px solid rgba(15, 23, 42, 0.08)" }}
             >
               {label === "GitHub" && (
                 <img
@@ -116,14 +116,10 @@ const AutoUISocialLinks: React.FC = () => {
                 </svg>
               )}
             </span>
-            <span>{label}</span>
-            {display ? (
-              <span className="ml-auto text-sm opacity-80">{display}</span>
-            ) : (
-              <span className="ml-auto text-sm opacity-80 truncate max-w-[120px]">
-                {href.replace(/^https?:\/\//, "").split("/")[0]}
-              </span>
-            )}
+            <span className="whitespace-nowrap">{label}</span>
+            <span className="ml-auto text-sm opacity-80 truncate max-w-[200px]">
+              {display ?? href.replace(/^https?:\/\//, "").split("/")[0]}
+            </span>
           </a>
         ))}
       </div>

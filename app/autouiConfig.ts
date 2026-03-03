@@ -19,6 +19,7 @@ import {
   getTechStackAndGoals,
   getWhatMakesMeDifferent,
   getProblemsThatExciteMe,
+  toggleSiteLanguage,
 } from './autouiFunctions';
 
 // Deprecated demo state and helper functions were removed to keep AutoUI focused
@@ -105,6 +106,12 @@ const autouiConfig: AutoUIConfig = {
     getProblemsThatExciteMe: {
       prompt: 'Returns intro, points, and optional quote about problems that excite Vitalik (growth, weak sides, learning). Use when asked what kind of problems excite him. Then render AutoUIProblemsExciteCard with the result.',
       callFunc: getProblemsThatExciteMe,
+      canShareDataWithLLM: true,
+    },
+    toggleSiteLanguage: {
+      prompt:
+        'Toggle the language of the main website. When user asks to switch language (e.g. to Ukrainian, Polish, English), call toggleSiteLanguage({ targetLanguage: "ua" | "pl" | "en" }). If they just say "toggle language", call it with no params to cycle. This only affects the site content, not your own language.',
+      callFunc: toggleSiteLanguage,
       canShareDataWithLLM: true,
     },
   },

@@ -21,7 +21,9 @@ function useAskChat() {
   const sendToChat = useCallback((text: string) => {
     if (typeof window === "undefined") return;
     window.dispatchEvent(
-      new CustomEvent("autoui-ask", { detail: { text: text.trim() } })
+      new CustomEvent("autoui-prefill-chat", {
+        detail: { text: text.trim(), autoSend: false },
+      })
     );
   }, []);
   return sendToChat;

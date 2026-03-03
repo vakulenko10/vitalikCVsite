@@ -277,3 +277,20 @@ export function getProblemsThatExciteMe(): ProblemsExciteMeData {
 
 autouiRegisterFunctionParamsSchema(getProblemsThatExciteMe);
 
+// Toggle the site language from the chat.
+// If targetLanguage is provided, switch to that; otherwise cycle.
+export function toggleSiteLanguage(params?: { targetLanguage?: "en" | "ua" | "pl" }) {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(
+      new CustomEvent("autoui-toggle-language", {
+        detail: { target: params?.targetLanguage, cycle: !params?.targetLanguage },
+      })
+    );
+  }
+  return {
+    language: params?.targetLanguage ?? "cycled",
+  };
+}
+
+autouiRegisterFunctionParamsSchema(toggleSiteLanguage);
+
