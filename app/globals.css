@@ -384,11 +384,31 @@ button{
   background: #ffffff !important;
   transform: translateY(0);
 }
-.welcome h2{
-  font-size: 3rem;
+/* Welcome hero: "Hi, I am Vitalik!" – distinctive font, bigger */
+.welcome h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 12vw, 6.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
-.welcome h4{
-  
+@media (max-width: 768px) {
+  .welcome h1 {
+    font-size: clamp(3.5rem, 14vw, 5rem);
+  }
+}
+/* 385–767px: keep character fully visible and bottom-aligned (fits below text) */
+@media (min-width: 385px) and (max-width: 767px) {
+  .welcome-character-img {
+    max-height: min(60vh, calc(100vh - 220px)) !important;
+  }
+}
+.welcome h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+.welcome h4 {
   font-size: 1.2rem;
   background-color: #d99592;
   justify-self: start;

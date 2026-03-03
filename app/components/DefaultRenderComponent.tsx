@@ -1,8 +1,8 @@
-"use client"
-import Image from 'next/image';
+"use client";
+
 import React from 'react';
 import { renderTextByProperty } from './mainconsts';
-import { easeInOut, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface DefaultRenderComponentProps {
   sectionData?: Record<string, unknown>[];
@@ -17,37 +17,38 @@ const DefaultRenderComponent = ({ sectionData = [] }: DefaultRenderComponentProp
   const activeItemProps = Object.keys(activeItem);
   
   return (
-    <div className='flex flex-col justify-end items-center min-h-[80vh] md:gap-10 md:grid md:grid-cols-2 md:items-center md:justify-start py-10'>
+    <div className='flex flex-col justify-end items-center min-h-[100vh] md:min-h-[100vh] md:gap-8 md:grid md:grid-cols-2 md:items-stretch md:justify-items-stretch pt-10 pb-0 md:pt-6 md:pb-0'>
+      {/* On small screens: mt-auto pushes character to section bottom so he peeks from bottom */}
       <motion.div
-        whileTap={{ scale: 0.8, transition: { duration: 0.3 } }}
-        className='order-2  justify-self-center flex md:order-1 justify-center items-center md:justify-end md:items-end relative h-1/2 md:h-full'
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.5, ease: easeInOut }}
-        initial={{ scale: 1.3, y: 100 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
+        className='order-2 w-full flex md:order-1 justify-center items-end md:justify-center relative min-h-0 md:min-h-0 md:h-full overflow-hidden mt-auto md:mt-0'
       >
-        {/* Render image on the right side */}
+        {/* Character: peeks up from bottom after background finishes */}
         {activeItemProps.includes('imageURL') && (
-          <img
+          <motion.img
             src={String(activeItem['imageURL'])}
-            className='w-full md:h-3/4 md:w-auto  object-contain '
-            alt="Image"
+            className='welcome-character-img w-full max-w-full max-h-[88vh] md:max-h-[92vh] object-contain object-bottom'
+            alt=""
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 50,
+              damping: 22,
+              mass: 0.8,
+              delay: 1.35,
+            }}
           />
         )}
       </motion.div>
-      
+
       <motion.div
-        drag
-        dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-        initial={{ opacity: 0, x: -100 }}
-        whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
-        whileTap={{ scale: 0.8, transition: { duration: 0.3 } }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className='order-1 md:order-2 flex flex-col gap-[20px] md:justify-self-start text-center md:text-start items-center justify-self-center'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 2.15 }}
+        className='order-1 md:order-2 flex flex-col justify-center gap-4 text-center md:text-start items-center md:items-start px-4 md:px-0'
       >
-        {/* Render text data on the left side */}
-        <div className='text py-10 '>
+        {/* Text block: fades in place just after character peeks out */}
+        <div className='text py-6 md:py-0'>
           {activeItemProps.map((prop, index) => {
             if (prop !== 'imageURL' && prop !== '_id') {
               return (

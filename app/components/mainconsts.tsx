@@ -20,7 +20,7 @@ export const collectionsToSections: Record<string, string> = {
 export const Sections = Object.values(collectionsToSections);
 
 export const sectionClasses: Record<string, string> = {
-    "helloitems": ` min-h-[100svh] bg-[#F2C18D] bg-center pb-[10px] md:pb-0  bg-cover  `,
+    "helloitems": ` min-h-[100svh] bg-[#F2C18D] bg-center pb-0 bg-cover  `,
     "myportfolioitems": 'bg-[#C5EBAA] relative md:min-h-[100vh] ',
     "aboutmeitems": ' relative h-[100vh] md:min-h-[100vh] py-[10px] ',
     "skillitems": ' bg-[#C5EBAA] min-h-[100vh] relative',
