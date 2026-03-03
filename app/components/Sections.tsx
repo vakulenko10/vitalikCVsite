@@ -19,14 +19,14 @@ export const HelloBg = () => {
           animate={{ height: '100%', y: 0 }}
           transition={{ delay: 0, duration: 1 }}
           whileInView={{ scaleY: 1 }}
-          className=' absolute top-0 z-1 h-3/4 w-full bg-[#A5DD9B] '
+          className=' absolute top-0 z-1 h-3/4 w-full bg-[#A5DD9B] site-stripe '
         ></motion.div>
         <motion.div
           initial={{ y: 500 }}
           animate={{ height: '75%', y: 0 }}
           transition={{ delay: 0.1, duration: 1 }}
           whileInView={{ scaleY: 1 }}
-          className='absolute top-1/4 z-2 h-1/2 w-full bg-[#C5EBAA]'
+          className='absolute top-1/4 z-2 h-1/2 w-full bg-[#C5EBAA] site-stripe'
         >
           <motion.div></motion.div>
         </motion.div>
@@ -34,13 +34,13 @@ export const HelloBg = () => {
           initial={{ height: '300%', y: 500 }}
           animate={{ height: '50%', y: 0 }}
           transition={{ delay: 0.2, duration: 1 }}
-          className='z-3 absolute top-1/2  h-1/4 w-full bg-[#F6F193]'
+          className='z-3 absolute top-1/2  h-1/4 w-full bg-[#F6F193] site-stripe'
         ></motion.div>
         <motion.div
           initial={{ height: '300%', y: 300 }}
           animate={{ height: '25%', y: 0 }}
           transition={{ delay: 0.3, duration: 1 }}
-          className='z-4 absolute top-3/4 h-1/4 w-full bg-[#F2C18D]'
+          className='z-4 absolute top-3/4 h-1/4 w-full bg-[#F2C18D] site-stripe'
         ></motion.div>
       </motion.div>
     </AnimatePresence>
@@ -86,35 +86,43 @@ function Sections() {
   }
   
   const backgroundToSection: Record<string, React.ReactNode> = {
+    "aboutmeitems": (
+      <div className='top-0 left-0 w-full h-full absolute z-0'>
+        <div className='h-1/4 w-full bg-[#F2C18D] site-stripe'></div>
+        <div className='h-1/4 w-full bg-[#F2C18D] site-stripe'></div>
+        <div className='h-1/4 w-full bg-[#F2C18D] site-stripe'></div>
+        <div className='h-1/4 w-full bg-[#F2C18D] site-stripe'></div>
+      </div>
+    ),
     "myportfolioitems": (
       <div className='top-0 left-0 w-full h-full absolute z-0'>
-        <div className='h-[10%] w-full bg-[#F6F193]'></div>
-        <div className='h-[10%]  w-full bg-[#F6F193]'></div>
-        <div className='h-[10%]  w-full bg-[#F6F193]'></div>
-        <div className='h-[10%]   w-full bg-[#C5EBAA]'>.</div>
-        <div className='h-[10%]  w-full bg-[#C5EBAA]'></div>
-        <div className='h-[10%]  w-full bg-[#C5EBAA]'></div>
-        <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
-        <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
-        <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
-        <div className='h-[10%]  w-full bg-[#A5DD9B]'></div>
+        <div className='h-[10%] w-full bg-[#F6F193] site-stripe'></div>
+        <div className='h-[10%]  w-full bg-[#F6F193] site-stripe'></div>
+        <div className='h-[10%]  w-full bg-[#F6F193] site-stripe'></div>
+        <div className='h-[10%]   w-full bg-[#C5EBAA] site-stripe'>.</div>
+        <div className='h-[10%]  w-full bg-[#C5EBAA] site-stripe'></div>
+        <div className='h-[10%]  w-full bg-[#C5EBAA] site-stripe'></div>
+        <div className='h-[10%]  w-full bg-[#A5DD9B] site-stripe'></div>
+        <div className='h-[10%]  w-full bg-[#A5DD9B] site-stripe'></div>
+        <div className='h-[10%]  w-full bg-[#A5DD9B] site-stripe'></div>
+        <div className='h-[10%]  w-full bg-[#A5DD9B] site-stripe'></div>
       </div>
     ),
     "helloitems": <HelloBg />,
     "skillitems": (
       <div className='top-0 left-0 w-full h-full absolute z-0'>
-        <div className='h-1/4 w-full bg-[#A5DD9B]'></div>
-        <div className='h-1/4 w-full bg-[#A5DD9B]'></div>
-        <div className='h-1/4 w-full bg-[#A5DD9B]'></div>
-        <div className='h-1/4 w-full bg-[#C5EBAA]'></div>
+        <div className='h-1/4 w-full bg-[#A5DD9B] site-stripe'></div>
+        <div className='h-1/4 w-full bg-[#A5DD9B] site-stripe'></div>
+        <div className='h-1/4 w-full bg-[#A5DD9B] site-stripe'></div>
+        <div className='h-1/4 w-full bg-[#C5EBAA] site-stripe'></div>
       </div>
     ),
     "mynewsitems": (
       <div className='top-0 left-0 w-full h-full absolute z-0'>
-        <div className='h-1/4 w-full bg-[#C5EBAA]'></div>
-        <div className='h-1/4 w-full bg-[#C5EBAA]'></div>
-        <div className='h-1/4 w-full bg-[#C5EBAA]'></div>
-        <div className='h-1/4 w-full bg-[#C5EBAA]'></div>
+        <div className='h-1/4 w-full bg-[#C5EBAA] site-stripe'></div>
+        <div className='h-1/4 w-full bg-[#C5EBAA] site-stripe'></div>
+        <div className='h-1/4 w-full bg-[#C5EBAA] site-stripe'></div>
+        <div className='h-1/4 w-full bg-[#C5EBAA] site-stripe'></div>
       </div>
     ),
   };

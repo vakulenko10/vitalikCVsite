@@ -47,7 +47,7 @@ export default function AskMeSection() {
         {stripes.map((color, i) => (
           <div
             key={i}
-            className="h-1/4 w-full"
+            className="h-1/4 w-full site-stripe"
             style={{ backgroundColor: color }}
           />
         ))}

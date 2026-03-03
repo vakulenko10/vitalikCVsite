@@ -269,6 +269,60 @@ button{
   scrollbar-color: rgb(150, 150, 150) rgb(0, 0, 0);
 }
 
+/* ==== Site background play animation (triggered by chat "Play background" button) ==== */
+@keyframes site-stripe-play {
+  0% {
+    background-color: #A5DD9B;
+  }
+  25% {
+    background-color: #C5EBAA;
+  }
+  50% {
+    background-color: #F6F193;
+  }
+  75% {
+    background-color: #F2C18D;
+  }
+  100% {
+    background-color: #A5DD9B;
+  }
+}
+
+.site-bg-playing .site-stripe {
+  animation: site-stripe-play 4s ease-in-out infinite;
+}
+
+.site-bg-playing .site-stripe:nth-child(1) {
+  animation-delay: 0s;
+}
+.site-bg-playing .site-stripe:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.site-bg-playing .site-stripe:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.site-bg-playing .site-stripe:nth-child(4) {
+  animation-delay: 0.9s;
+}
+.site-bg-playing .site-stripe:nth-child(5) {
+  animation-delay: 1.2s;
+}
+.site-bg-playing .site-stripe:nth-child(6) {
+  animation-delay: 1.5s;
+}
+.site-bg-playing .site-stripe:nth-child(7) {
+  animation-delay: 1.8s;
+}
+.site-bg-playing .site-stripe:nth-child(8) {
+  animation-delay: 2.1s;
+}
+.site-bg-playing .site-stripe:nth-child(9) {
+  animation-delay: 2.4s;
+}
+.site-bg-playing .site-stripe:nth-child(10) {
+  animation-delay: 2.7s;
+}
+
 /* ==== AutoUI chat theming ==== */
 /* User messages: use site orange, only for user bubbles */
 .autoui-chat-message.user .autoui-chat-bubble {
