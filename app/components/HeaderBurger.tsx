@@ -11,14 +11,14 @@ const HeaderBurger = ({ classes, handleBurgerChange, isSmallHeaderActive }: Head
   const isChecked = isSmallHeaderActive !== undefined ? isSmallHeaderActive : false;
   
   return (
-    <>
-      <label className={`burger md:hidden `} htmlFor="burger">
+    <div className="relative z-[1000] md:hidden">
+      <label className="burger" htmlFor="burger" aria-label={isChecked ? 'Close menu' : 'Open menu'}>
         <input type="checkbox" id="burger" checked={isChecked} onChange={handleBurgerChange} />
-        <span className='white'></span>
-        <span className='white'></span>
-        <span className='white'></span>
+        <span className="white" />
+        <span className="white" />
+        <span className="white" />
       </label>
-    </>
+    </div>
   );
 };
 

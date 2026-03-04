@@ -21,7 +21,6 @@ const LinksContainer = ({ isSmallHeaderActive, setIsSmallHeaderActive }: LinksCo
   const changeLanguage = () => {
     // Calculate the index of the next language
     const nextLanguageIndex = (languageIndex + 1) % languageList.length;
-    console.log('clicked');
     // Update the language state directly
     setLanguage(languageList[nextLanguageIndex]);
   
@@ -35,27 +34,28 @@ const LinksContainer = ({ isSmallHeaderActive, setIsSmallHeaderActive }: LinksCo
   const handleLinkClick = () => {
     setIsSmallHeaderActive(false);
   };
-  
+
   return (
-    <div className={`justify-center items-center md:flex gap-1 ${isSmallHeaderActive ? `md:relative fixed inset-x-0 inset-y-0 pt-10 p-3 bg-[#F2C18D]  h-screen md:h-auto md:block md:bg-inherit md:p-0` : `hidden`} `}>
-      <ul className={`md:bg-transparent ${isSmallHeaderActive ? `flex flex-col md:flex md:flex-row md:p-0 md:gap-[10px] md:bg-transparent ` : `md:flex md:gap-[10px]`} `}>
+    <div className={`md:flex md:items-center md:gap-4 ${isSmallHeaderActive ? `fixed inset-0 z-[998] pt-20 pb-10 px-5 overflow-y-auto overscroll-contain h-screen flex flex-col bg-gradient-to-b from-[#F2C18D] to-[#e8b87a] md:bg-inherit` : `hidden`} ${!isSmallHeaderActive ? `` : `md:relative md:inset-auto md:pt-0 md:pb-0 md:px-0 md:overflow-visible md:bg-inherit md:h-auto`}`}
+    >
+      <ul className={`md:bg-transparent flex-1 ${isSmallHeaderActive ? `flex flex-col md:flex md:flex-row md:p-0 md:gap-[10px] md:bg-transparent gap-0` : `md:flex md:gap-[10px]`}`}>
         {Sections.map((link, index) => (
-          <Link 
-            key={index} 
-            onClick={handleLinkClick} 
-            href={`#${link}`} 
-            className={` text-[30px] md:text-[20px] transition duration-200 ease-linear ${isSmallHeaderActive ? `md:bg-transparent p-5 hover:bg-[#fafafa9e] md:hover:bg-transparent md:hover:text-[#ffffffec] md:p-0 ` : `md:hover:text-[#ffffff80]`}`}
+          <Link
+            key={index}
+            onClick={handleLinkClick}
+            href={`#${link}`}
+            className={`text-[22px] md:text-[20px] font-medium transition duration-200 ease-linear ${isSmallHeaderActive ? `md:bg-transparent py-4 px-5 rounded-xl hover:bg-white/20 md:hover:bg-transparent md:hover:text-[#ffffffec] md:py-0 md:px-0 md:rounded-none text-white` : `md:hover:text-[#ffffff80]`}`}
           >
             {link.charAt(0).toUpperCase() + link.slice(1)}
           </Link>
         ))}
       </ul>
-      <button 
-        title='click to change the language' 
-        className='langbtn  font-bold px-6 rounded-full bg-[#C5EBAA] md:bg-[#F2C18D]' 
+      <button
+        title="Change language"
+        className="langbtn font-bold px-6 py-2.5 rounded-full bg-[#C5EBAA] md:bg-[#F2C18D] text-white shadow-sm hover:opacity-95 active:opacity-90 transition-opacity mt-4 md:mt-0"
         onClick={changeLanguage}
       >
-        <h4 className='text-[#fff] langbtn-hover:text-[#fff]'>{language}</h4>
+        <span className="text-sm">{language}</span>
       </button>
     </div>
   );

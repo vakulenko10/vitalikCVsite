@@ -206,6 +206,7 @@ button{
   top: 28px;
   left: 5px;
 }
+
 @keyframes animateGradient {
   0% {
     background-position: 0% 50%;
