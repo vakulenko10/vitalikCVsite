@@ -97,7 +97,7 @@ const Section = ({ collectionName, renderType, className = "", backgroundItem }:
     return (
       <div
         id={collectionsToSections[collectionName]}
-        className={`${collectionsToSections[collectionName]} section w-full h-[100vh] overflow-y-auto box-border ${className} ${sectionClasses[collectionName]}`}
+        className={`${collectionsToSections[collectionName]} section w-full min-h-[100dvh] h-[100dvh] md:h-[100vh] overflow-y-auto box-border ${className} ${sectionClasses[collectionName]}`}
       >
         <Container classes={`flex justify-center items-center h-full relative  `}>
           <Loader />
@@ -108,7 +108,7 @@ const Section = ({ collectionName, renderType, className = "", backgroundItem }:
     return (
       <div
         id={collectionsToSections[collectionName]}
-        className={`${collectionsToSections[collectionName]} min-h-[100vh] section w-full overflow-y-auto box-border ${className} ${sectionClasses[collectionName]} `}
+        className={`${collectionsToSections[collectionName]} min-h-[100dvh] md:min-h-[100vh] section w-full overflow-y-auto box-border ${className} ${sectionClasses[collectionName]} `}
       >
         {backgroundItem}
         <Container>

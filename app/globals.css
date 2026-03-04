@@ -395,13 +395,19 @@ button{
 }
 @media (max-width: 768px) {
   .welcome h1 {
-    font-size: clamp(3.5rem, 14vw, 5rem);
+    font-size: clamp(4rem, 18vw, 6.5rem);
+  }
+  .welcome h2 {
+    font-size: clamp(2.25rem, 6vw, 3.5rem);
+  }
+  .welcome h4 {
+    font-size: 1.35rem;
   }
 }
-/* 385–767px: keep character fully visible and bottom-aligned (fits below text) */
+/* 385–767px: keep character fully visible and bottom-aligned (fits below text); use dvh for mobile browser chrome */
 @media (min-width: 385px) and (max-width: 767px) {
   .welcome-character-img {
-    max-height: min(60vh, calc(100vh - 220px)) !important;
+    max-height: min(60dvh, calc(100dvh - 220px)) !important;
   }
 }
 .welcome h2 {

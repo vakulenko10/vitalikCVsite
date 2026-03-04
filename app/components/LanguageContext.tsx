@@ -23,6 +23,13 @@ interface LanguageProviderProps {
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const [language, setLanguage] = useState<string>('en'); // Default language is English
 
+  // Expose current language for the chat assistant (getSiteLanguage() and LLM context)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      (window as unknown as { __PORTFOLIO_SITE_LANGUAGE__?: string }).__PORTFOLIO_SITE_LANGUAGE__ = language;
+    }
+  }, [language]);
+
   // Listen for AutoUI-triggered language changes from the chat
   useEffect(() => {
     const handler = (e: Event) => {

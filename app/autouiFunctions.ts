@@ -277,6 +277,30 @@ export function getProblemsThatExciteMe(): ProblemsExciteMeData {
 
 autouiRegisterFunctionParamsSchema(getProblemsThatExciteMe);
 
+const SITE_LANGUAGE_LABELS: Record<string, string> = {
+  en: "English",
+  ua: "Ukrainian",
+  pl: "Polish",
+};
+
+/**
+ * Returns the current website display language so the assistant can respond in the same language.
+ * Call this when you need to know which language the user is viewing the site in.
+ */
+export function getSiteLanguage(): { language: "en" | "ua" | "pl"; label: string } {
+  const raw =
+    typeof window !== "undefined"
+      ? (window as unknown as { __PORTFOLIO_SITE_LANGUAGE__?: string }).__PORTFOLIO_SITE_LANGUAGE__
+      : undefined;
+  const language = raw === "ua" || raw === "pl" ? raw : "en";
+  return {
+    language,
+    label: SITE_LANGUAGE_LABELS[language] ?? "English",
+  };
+}
+
+autouiRegisterFunctionParamsSchema(getSiteLanguage);
+
 // Toggle the site language from the chat.
 // If targetLanguage is provided, switch to that; otherwise cycle.
 export function toggleSiteLanguage(params?: { targetLanguage?: "en" | "ua" | "pl" }) {

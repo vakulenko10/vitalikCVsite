@@ -20,8 +20,6 @@ const baseConfig = {
   // Production optimizations
   compress: true,
   poweredByHeader: false,
-  // Reduce bundle size
-  swcMinify: true,
   // Explicit Turbopack config to silence Next 16 warning
   turbopack: {},
 };

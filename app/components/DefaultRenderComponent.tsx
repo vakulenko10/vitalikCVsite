@@ -17,7 +17,7 @@ const DefaultRenderComponent = ({ sectionData = [] }: DefaultRenderComponentProp
   const activeItemProps = Object.keys(activeItem);
   
   return (
-    <div className='flex flex-col justify-end items-center min-h-[100vh] md:min-h-[100vh] md:gap-8 md:grid md:grid-cols-2 md:items-stretch md:justify-items-stretch pt-10 pb-0 md:pt-6 md:pb-0'>
+    <div className='flex flex-col justify-end items-center min-h-[100dvh] md:min-h-[100vh] md:gap-8 md:grid md:grid-cols-2 md:items-stretch md:justify-items-stretch pt-10 pb-[env(safe-area-inset-bottom)] md:pt-6 md:pb-0'>
       {/* On small screens: mt-auto pushes character to section bottom so he peeks from bottom */}
       <motion.div
         className='order-2 w-full flex md:order-1 justify-center items-end md:justify-center relative min-h-0 md:min-h-0 md:h-full overflow-hidden mt-auto md:mt-0'
@@ -45,10 +45,10 @@ const DefaultRenderComponent = ({ sectionData = [] }: DefaultRenderComponentProp
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut", delay: 2.15 }}
-        className='order-1 md:order-2 flex flex-col justify-center gap-4 text-center md:text-start items-center md:items-start px-4 md:px-0'
+        className='order-1 md:order-2 flex flex-col justify-center gap-4 text-center md:text-start items-center md:items-start px-4 md:px-0 mt-8 md:mt-0'
       >
-        {/* Text block: fades in place just after character peeks out */}
-        <div className='text py-6 md:py-0'>
+        {/* Text block: fades in place just after character peeks out; on mobile pushed lower and larger */}
+        <div className='text py-6 pt-10 md:py-0 md:pt-0'>
           {activeItemProps.map((prop, index) => {
             if (prop !== 'imageURL' && prop !== '_id') {
               return (
