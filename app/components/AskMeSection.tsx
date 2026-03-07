@@ -4,7 +4,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import Container from "./Container";
 import { useLanguage } from "./LanguageContext";
 
-// Single color so section looks solid; stripes exist only for play-background animation.
+// First stripe uses previous section (someNews) bg for overlap effect; rest use Ask Me green.
+const PREV_SECTION_BG = "#C5EBAA";
 const SECTION_BG_COLOR = "#A5DD9B";
 const STRIPE_COUNT = 4;
 
@@ -142,65 +143,65 @@ export default function AskMeSection() {
   return (
     <section
       id="ask-me"
-      className="relative min-h-[100dvh] md:min-h-[100vh] w-full overflow-hidden py-16 md:py-24 pb-[calc(1rem+env(safe-area-inset-bottom))]"
+      className="relative min-h-[100dvh] md:min-h-[100vh] w-full overflow-hidden flex flex-col pb-[env(safe-area-inset-bottom)]"
       style={{ background: SECTION_BG_COLOR }}
     >
-      {/* Stripe background — one color; stripes only for play-background animation */}
-      <div className="absolute inset-0 z-0 flex flex-col">
+      {/* First stripe = previous section bg (overlap); rest = Ask Me green */}
+      <div className="absolute inset-0 z-0 flex flex-col pointer-events-none">
         {Array.from({ length: STRIPE_COUNT }, (_, i) => (
           <div
             key={i}
             className="h-1/4 w-full site-stripe"
-            style={{ backgroundColor: SECTION_BG_COLOR }}
+            style={{ backgroundColor: i === 0 ? PREV_SECTION_BG : SECTION_BG_COLOR }}
           />
         ))}
       </div>
 
-      <Container classes="relative z-10 flex flex-col items-center justify-center min-h-[80vh]">
-        <div className="flex justify-center items-center">
-          <h1 className="text-center capitalize my-5 text-white z-10 md:sectionTitle">
+      <Container classes="relative z-10 flex flex-col min-h-full">
+        <header className="flex-shrink-0 pt-6 sm:pt-8 md:pt-10 pb-4 sm:pb-6 text-center">
+          <h1 className="text-center capitalize text-white z-10 sectionTitle px-2">
             Ask me anything
           </h1>
-        </div>
-        <p className="text-center text-white/90 text-lg md:text-xl mb-10 max-w-2xl">
+        </header>
+        <p className="text-center text-white/90 text-base sm:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto px-2 flex-shrink-0">
           Tap a question — the assistant will open and answer it for you.
         </p>
-
-        {/* Question grid: loading skeleton, or DB questions, or fallback */}
-        {loadState === "loading" ? (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-5xl">
-            {Array.from({ length: 6 }, (_, i) => (
-              <li key={i}>
-                <div
-                  className="w-full h-[72px] rounded-xl bg-white/60 animate-pulse"
-                  aria-hidden
-                />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-5xl">
-            {list.map((q, i) => (
-              <li key={i}>
-                <button
-                  type="button"
-                  onClick={() => sendToChat(q.text, q.autoSend)}
-                  className="group w-full text-left px-5 py-4 rounded-xl font-medium text-gray-900 bg-white/95 border-2 border-white shadow-md hover:shadow-xl hover:scale-[1.02] hover:border-[#A5DD9B] hover:bg-white transition-all duration-200 active:scale-[0.99] flex items-start gap-3"
-                >
-                  <span
-                    className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-[#A5DD9B] bg-[#A5DD9B]/20 group-hover:bg-[#A5DD9B]/30 transition-colors"
+        <main className="flex-1 flex flex-col min-h-0 w-full">
+          {loadState === "loading" ? (
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-5xl mx-auto">
+              {Array.from({ length: 6 }, (_, i) => (
+                <li key={i}>
+                  <div
+                    className="w-full h-[72px] rounded-xl bg-white/60 animate-pulse"
                     aria-hidden
+                  />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-5xl mx-auto">
+              {list.map((q, i) => (
+                <li key={i}>
+                  <button
+                    type="button"
+                    onClick={() => sendToChat(q.text, q.autoSend)}
+                    className="group w-full text-left px-5 py-4 rounded-xl font-medium text-gray-900 bg-white/95 border-2 border-white shadow-md hover:shadow-xl hover:scale-[1.02] hover:border-[#A5DD9B] hover:bg-white transition-all duration-200 active:scale-[0.99] flex items-start gap-3"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
-                  </span>
-                  <span className="block text-sm md:text-base leading-snug pt-0.5">{q.text}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
+                    <span
+                      className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-[#A5DD9B] bg-[#A5DD9B]/20 group-hover:bg-[#A5DD9B]/30 transition-colors"
+                      aria-hidden
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                      </svg>
+                    </span>
+                    <span className="block text-sm md:text-base leading-snug pt-0.5">{q.text}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </main>
       </Container>
     </section>
   );

@@ -9,7 +9,9 @@ interface ContainerProps {
 
 const Container = ({ children, classes = "" }: ContainerProps) => {
   return (
-    <div className={`h-full relative max-w-[1240px] px-4 l:px-0 mx-auto p-0 ${classes}`}>{children}</div>
+    <div className={`h-full relative w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 box-border ${classes}`}>
+      {children}
+    </div>
   );
 };
 

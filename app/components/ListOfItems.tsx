@@ -12,31 +12,29 @@ const ListOfItems = ({ sectionData = [] }: ListOfItemsProps) => {
   const isInView = useInView(ref);
   
   return (
-    <motion.div ref={ref} className='flex flex-col justify-center items-center p-5'>
-      <motion.div className=' gap-5 flex w-full min-[500px]:w-4/5 md:w-3/5 items-baseline justify-center md:items-baseline md:gap-8 flex-wrap'>
+    <motion.div ref={ref} className="flex flex-col justify-center items-center py-6 sm:py-8 px-4">
+      <motion.div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 w-full max-w-4xl mx-auto">
         {sectionData.map((item, index) => (
           <motion.div
-            initial={{ opacity: 0, x: -index }}
-            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.25, delay: index * 0.05 }}
+            whileHover={{ scale: 1.05 }}
             key={index}
-            className='flex flex-col box-border w-[100px] items-center justify-end '
+            className="flex flex-col items-center justify-end w-[90px] sm:w-[100px] md:w-[110px]"
           >
             {Object.keys(item).map((prop, ind) => {
               if (prop === '_id') return null;
-              
               return prop === 'imageURL' ? (
                 <motion.img
                   key={ind}
-                  whileTap={{ rotate: "15deg", transition: { duration: 2 } }}
-                  className="textw-[35px] md:w-[50px] order-1 object-cover cursor-default"
+                  whileTap={{ rotate: 12, transition: { duration: 0.3 } }}
+                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain order-1 flex-shrink-0"
                   src={String(item[prop] || "")}
-                  alt={`${ind}`}
+                  alt=""
                 />
               ) : (
-                <h3 key={ind} className='text-black order-2 cursor-default'>
+                <h3 key={ind} className="text-black order-2 text-center text-sm sm:text-base font-medium mt-2 break-words cursor-default">
                   {String(item[prop] || "")}
                 </h3>
               );

@@ -92,34 +92,53 @@
   contain: layout style paint;
   will-change: transform;
 }
+
+/* Carousel controls: consistent focus (no browser default orange) */
+.carousel button:focus {
+  outline: none;
+}
+.carousel button:focus-visible {
+  outline: none;
+}
 .page{
   padding-top: 100px;
   min-height: 80vh;
 }
 h1{
-  font-size: 36px;
+  font-size: clamp(1.5rem, 4vw + 1rem, 2.25rem);
+  line-height: 1.2;
+  font-weight: 700;
 }
 h2{
-  font-size: 30px;
+  font-size: clamp(1.35rem, 3vw + 0.9rem, 1.875rem);
+  line-height: 1.25;
+  font-weight: 600;
 }
 h3{
-  font-size: 24px;
+  font-size: clamp(1.2rem, 2.5vw + 0.75rem, 1.5rem);
+  line-height: 1.3;
+  font-weight: 600;
 }
 h4{
-  font-size: 18px;
+  font-size: clamp(1rem, 2vw + 0.5rem, 1.125rem);
+  line-height: 1.4;
+  font-weight: 500;
 }
 h5{
-  font-size: 24px;
+  font-size: clamp(1rem, 1.5vw + 0.5rem, 1.25rem);
+  line-height: 1.4;
+  font-weight: 500;
 }
 h6{
-  font-size: 12px;
+  font-size: clamp(0.75rem, 1vw + 0.5rem, 0.875rem);
+  line-height: 1.4;
+  font-weight: 500;
 }
 h1, h2{
   font-family: "PT Serif", serif;
 }
-h3, h4{
+h3, h4, h5, h6{
   font-family: 'Montserrat', sans-serif;
-  
 }
 
 /* @font-face {
@@ -218,26 +237,7 @@ button{
     background-position: 0% 50%;
   }
 }
-@media  (max-width: 768px ) {
-  h1{
-    font-size: 20px;
-  }
-  h2{
-    font-size: 24px;
-  }
-  h3{
-    font-size: 18px;
-  }
-  h4{
-    font-size: 16px;
-  }
-  h5{
-    font-size: 12px;
-  }
-  h6{
-    font-size: 10px;
-  }
-}
+/* Responsive type handled by clamp() above; section titles get extra scaling */
 .animate-gradient {
   animation: animateGradient 5s linear infinite;
 }
@@ -421,22 +421,42 @@ button{
   justify-self: start;
   align-self: flex-start;
 }
+/* Section titles: same style for every section, modest size */
 .sectionTitle {
-  font-size: 80px;
+  font-size: clamp(1.5rem, 4vw + 0.75rem, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.06);
 }
-h1.about{
+/* Carousel/content h1/h4 only (do not affect section header title) */
+.about main h1 {
   display: flex;
-}
-h1.about{
-  font-weight: 500;
+  font-weight: 600;
   color: #fff;
 }
-h1.about::selection{
+.about main h1::selection {
   background-color: transparent;
   color: red;
 }
-h4.about{
-  color: #ffffffbd;
+.about main h4 {
+  color: rgba(255,255,255,0.9);
+}
+.someNews main h1,
+.about main h1 {
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+}
+.someNews main h4,
+.about main h4 {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  line-height: 1.45;
+}
+.Portfolio main h3 {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 600;
+}
+.Portfolio main h4 {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
 }
 /* h4.Portfolio{
   color: gray;

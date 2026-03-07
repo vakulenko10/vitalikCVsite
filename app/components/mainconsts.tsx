@@ -20,16 +20,16 @@ export const collectionsToSections: Record<string, string> = {
 export const Sections = Object.values(collectionsToSections);
 
 export const sectionClasses: Record<string, string> = {
-    "helloitems": ` min-h-[100dvh] bg-[#F2C18D] bg-center pb-0 bg-cover pb-[env(safe-area-inset-bottom)] `,
-    "myportfolioitems": 'bg-[#C5EBAA] relative min-h-[100dvh] md:min-h-[100vh] pb-[env(safe-area-inset-bottom)]',
-    "aboutmeitems": ' relative min-h-[100dvh] h-[100dvh] md:min-h-[100vh] md:h-[100vh] py-[10px] pb-[env(safe-area-inset-bottom)] ',
-    "skillitems": ' bg-[#C5EBAA] min-h-[100dvh] md:min-h-[100vh] relative pb-[env(safe-area-inset-bottom)]',
-    "mynewsitems": 'relative min-h-[100dvh] h-[100dvh] md:min-h-[100vh] md:h-[100vh] bg-[#C5EBAA] py-[10px] text-black pb-[env(safe-area-inset-bottom)]',
+    "helloitems": "min-h-[100dvh] bg-[#F2C18D] bg-center bg-cover pb-[env(safe-area-inset-bottom)]",
+    "myportfolioitems": "bg-[#C5EBAA] relative min-h-[100dvh] md:min-h-[100vh] pb-[env(safe-area-inset-bottom)]",
+    "aboutmeitems": "relative min-h-[100dvh] md:min-h-[100vh] flex flex-col overflow-hidden pb-[env(safe-area-inset-bottom)]",
+    "skillitems": "bg-[#C5EBAA] min-h-[100dvh] md:min-h-[100vh] relative pb-[env(safe-area-inset-bottom)]",
+    "mynewsitems": "relative min-h-[100dvh] md:min-h-[100vh] bg-[#C5EBAA] text-black pb-[env(safe-area-inset-bottom)]",
 };
 
 export const SectionToRenderType: Record<string, string> = {
     "helloitems": "default",
-    "aboutmeitems": "carousel",
+    "aboutmeitems": "aboutGraph",
     "myportfolioitems": "gallery",
     "mynewsitems": "carousel",
     "skillitems": "list"

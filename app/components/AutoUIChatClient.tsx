@@ -1,9 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import dynamic from "next/dynamic";
 import type { AutoUIConfig } from "@autoai-ui/autoui";
-import autouiConfig from "../autouiConfig";
+import { baseAutouiConfig } from "../autouiConfig";
+import { useLanguage } from "./LanguageContext";
+
+const SITE_LANGUAGE_LABELS: Record<string, string> = {
+  en: "English",
+  ua: "Ukrainian",
+  pl: "Polish",
+};
 
 const ModalChatNoSSR = dynamic<{ config: AutoUIConfig }>(
   () =>
@@ -59,7 +66,23 @@ function useAskChatTrigger() {
 
 const AutoUIChatClient = () => {
   useAskChatTrigger();
-  return <ModalChatNoSSR config={autouiConfig} />;
+  const { language } = useLanguage();
+  const label = SITE_LANGUAGE_LABELS[language] ?? "English";
+
+  const config = useMemo<AutoUIConfig>(() => {
+    const base = baseAutouiConfig;
+    const appDescriptionPrompt = base.llm?.appDescriptionPrompt
+      ? `${base.llm.appDescriptionPrompt} The current website language is ${label}. When greeting, say "The current website language is ${label}" and respond in this language.`
+      : base.llm?.appDescriptionPrompt;
+    return {
+      ...base,
+      llm: base.llm
+        ? { ...base.llm, appDescriptionPrompt }
+        : base.llm,
+    };
+  }, [label]);
+
+  return <ModalChatNoSSR config={config} />;
 };
 
 export default AutoUIChatClient;

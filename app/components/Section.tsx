@@ -7,6 +7,7 @@ import Carousel from './Carousel';
 import Gallery from './Gallery';
 import Accordion from './Accordion';
 import ListOfItems from './ListOfItems';
+import AboutGraph from './AboutGraph';
 import { SectionToRenderType, Sections, collectionsToSections, sectionClasses } from './mainconsts';
 import Loader from './Loader';
 import Socials from './Socials';
@@ -82,6 +83,8 @@ const Section = ({ collectionName, renderType, className = "", backgroundItem }:
         return <DefaultRenderComponent sectionData={data} />;
       case "carousel":
         return <Carousel sectionData={data} sectionName={collectionsToSections[collectionName]} />;
+      case "aboutGraph":
+        return <AboutGraph sectionData={data} sectionName={collectionsToSections[collectionName]} />;
       case "gallery":
         return <Gallery sectionData={data} sectionName={collectionsToSections[collectionName]} />;
       case "accordion":
@@ -97,9 +100,9 @@ const Section = ({ collectionName, renderType, className = "", backgroundItem }:
     return (
       <div
         id={collectionsToSections[collectionName]}
-        className={`${collectionsToSections[collectionName]} section w-full min-h-[100dvh] h-[100dvh] md:h-[100vh] overflow-y-auto box-border ${className} ${sectionClasses[collectionName]}`}
+        className={`${collectionsToSections[collectionName]} section w-full min-h-[100dvh] md:min-h-[100vh] overflow-y-auto box-border ${className} ${sectionClasses[collectionName]}`}
       >
-        <Container classes={`flex justify-center items-center h-full relative  `}>
+        <Container classes="flex justify-center items-center min-h-[50vh]">
           <Loader />
         </Container>
       </div>
@@ -108,19 +111,23 @@ const Section = ({ collectionName, renderType, className = "", backgroundItem }:
     return (
       <div
         id={collectionsToSections[collectionName]}
-        className={`${collectionsToSections[collectionName]} min-h-[100dvh] md:min-h-[100vh] section w-full overflow-y-auto box-border ${className} ${sectionClasses[collectionName]} `}
+        className={`${collectionsToSections[collectionName]} min-h-[100dvh] md:min-h-[100vh] section w-full overflow-y-auto box-border ${className} ${sectionClasses[collectionName]}`}
       >
         {backgroundItem}
-        <Container>
-          {collectionsToSections[collectionName] != 'welcome' ? (
-            <div className='flex justify-center items-center'>
-              <h1 className='text-center  capitalize my-5 text-white z-10 md:sectionTitle'>
+        <Container classes="flex flex-col min-h-full">
+          {collectionsToSections[collectionName] !== 'welcome' ? (
+            <header className="flex-shrink-0 pt-6 sm:pt-8 md:pt-10 pb-4 sm:pb-6 text-center">
+              <h1 className="text-center capitalize text-white z-10 sectionTitle px-2">
                 {collectionsToSections[collectionName]}
               </h1>
-            </div>
+            </header>
           ) : null}
-          {RenderTypeToComponent(renderType, data)}
-          <Socials />
+          <main className="flex-1 flex flex-col min-h-0">
+            {RenderTypeToComponent(renderType, data)}
+          </main>
+          <footer className="flex-shrink-0 pt-6 pb-6 sm:pb-8">
+            <Socials />
+          </footer>
         </Container>
       </div>
     );

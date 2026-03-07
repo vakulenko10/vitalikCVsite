@@ -46,7 +46,7 @@ const autouiConfig: AutoUIConfig = {
     proxyUrl,
     sharedSecret,
     appDescriptionPrompt:
-      'You are an AI assistant for Vitalik Vakulenko\'s portfolio. Always say you are an AI assistant. LANGUAGE: At the start of the conversation (or when unsure), call getSiteLanguage() to get the current website language (en, ua, or pl). Respond in that language for all your messages: English for en, Ukrainian for ua, Polish for pl. When the user asks to change the site language, call toggleSiteLanguage({ targetLanguage: "en"|"ua"|"pl" }) and then continue in the new language. Use the following rules. (1) Social medias: when asked about social medias, links, GitHub, LinkedIn, or phone, render AutoUISocialLinks with no props — it always uses Vitalik\'s real profiles; you can optionally call getSocialLinks() if you want to mention the URLs in text. (2) Best project / proud project: when asked about the best project or what Vitalik is proud of, call getBestProject() and render AutoUIBestProjectCard with the returned object (title, subtitle, description, points, tags, npmUrl, repoUrl). (3) Tech stack and future goals: when asked about tech stack, what he wants to learn, or future goals, call getTechStackAndGoals() and render AutoUITechStackCard with the returned object; also answer in text: JavaScript, TypeScript, React, Next.js; interest in AI integrations and generative UI; interest in OOP (C#, Java, C++), already strong in OOP; open to any propositions; wants to study DevOps and CI/CD in depth. (4) What makes Vitalik different: call getWhatMakesMeDifferent() and render AutoUIDifferentiatorsCard with { points }. (5) Why hire me / company-specific: render AutoUIHireMeForm so the user can submit their company name and optional description; the form will send a new message to you to generate a tailored answer. (6) Problems that excite: call getProblemsThatExciteMe() and render AutoUIProblemsExciteCard with the returned { intro, points, quote }; keep the tone smart but not complex. (7) Play site background: when the user asks to play or animate the site background, render AutoUIPlayBackgroundButton. (8) Portfolio PDF / CV / install portfolio: when the user asks for the portfolio PDF, CV, resume, or to download/install the portfolio, render AutoUIPortfolioPDFDownload (no props needed; it always links to Vitalik\'s PDF portfolio). (9) Contact Vitalik: when the user wants to contact Vitalik, reach out, send a message, get in touch, or ask for a contact form, render AutoUIContactForm (optional prop: title). The form sends the message to Vitalik\'s email. (10) Portfolio list and highlights: use fetchPortfolioItems, filterPortfolioItemsByQuery, fetchPortfolioProjectDetailsByQuery, AutoUIPortfolioList, AutoUIHighlightCard, generateHighlightContent as before. Always give a short textual reply in addition to components when it helps.',
+      'You are the AI assistant for Vitalik Vakulenko\'s portfolio. Call getSiteLanguage() to get the current website language and respond in that language. Use each function and component as described in their prompts.',
     temperature: 0.2,
     maxTokens: 1500,
   },
@@ -113,7 +113,7 @@ const autouiConfig: AutoUIConfig = {
     },
     getSiteLanguage: {
       prompt:
-        'Returns the current website display language: { language: "en"|"ua"|"pl", label: "English"|"Ukrainian"|"Polish" }. Call this at the start of the conversation or when the user asks what language the site is in, so you can respond in the same language. Always respond in the language returned by getSiteLanguage().',
+        'Returns the current website language from the site context: { language: "en"|"ua"|"pl", label: "English"|"Ukrainian"|"Polish" }. Call at conversation start and when greeting; say "The current website language is [label]." using the returned label. Respond in that language (en=English, ua=Ukrainian, pl=Polish).',
       callFunc: getSiteLanguage,
       canShareDataWithLLM: true,
     },
@@ -198,4 +198,5 @@ const autouiConfig: AutoUIConfig = {
   },
 };
 
+export const baseAutouiConfig = autouiConfig;
 export default autouiConfig;

@@ -20,66 +20,63 @@ const Gallery = ({ sectionData = [], sectionName = "items" }: GalleryProps) => {
   const isInView = useInView(ref);
 
   return (
-    <div className="py-10">
+    <div className="py-6 sm:py-8 md:py-10">
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto px-4 lg:px-8"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 w-full max-w-6xl mx-auto"
         ref={ref}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.1 }}
+        transition={{ duration: 0.2 }}
       >
         {sectionData.map((sectionItem, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            className="group shadow-md hover:shadow-lg transition-transform bg-white p-4 rounded-lg overflow-hidden relative"
+            transition={{ delay: 0.05 * index }}
+            className="group bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col"
           >
-            {/* Image Wrapper */}
-            <div className="relative overflow-hidden rounded-lg">
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 z-10 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="flex gap-4">
-                  {sectionItem["projectURL"] && String(sectionItem["projectURL"]).trim() !== "" ? (
-                    <Link
-                      target="_blank"
-                      href={String(sectionItem["projectURL"])}
-                      className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
-                      title="View Project"
-                    >
-                      <BsFillEyeFill className="text-white w-6 h-6" />
-                    </Link>
-                  ) : null}
-                  {sectionItem["gitHubRepoURL"] && String(sectionItem["gitHubRepoURL"]).trim() !== "" ? (
-                    <Link
-                      target="_blank"
-                      href={String(sectionItem["gitHubRepoURL"])}
-                      className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
-                      title="GitHub Repository"
-                    >
-                      <FaGithub className="text-white w-6 h-6" />
-                    </Link>
-                  ) : null}
-                  {sectionItem["_id"] && String(sectionItem["_id"]).trim() !== "" ? (
-                    <Link
-                      href={`/projectDescription/${String(sectionItem["_id"])}`}
-                      className="bg-white bg-opacity-20 hover:bg-opacity-80 rounded-full p-3 transition"
-                      title="View Project Description"
-                    >
-                      <BsFileText className="text-white w-6 h-6" />
-                    </Link>
-                  ) : null}
-                </div>
-              </div>
+            <div className="relative overflow-hidden aspect-video sm:aspect-[4/3] bg-gray-100">
               <img
                 src={String(sectionItem["imageURL"] || "")}
-                alt={`${index}`}
-                className="w-full h-56 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+                alt=""
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 gap-3 sm:gap-4 p-4">
+                {sectionItem["projectURL"] && String(sectionItem["projectURL"]).trim() !== "" && (
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={String(sectionItem["projectURL"])}
+                    className="bg-white/20 hover:bg-white/90 hover:text-gray-900 rounded-full p-3 sm:p-3.5 transition-all min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    title="View Project"
+                  >
+                    <BsFillEyeFill className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+                  </Link>
+                )}
+                {sectionItem["gitHubRepoURL"] && String(sectionItem["gitHubRepoURL"]).trim() !== "" && (
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={String(sectionItem["gitHubRepoURL"])}
+                    className="bg-white/20 hover:bg-white/90 hover:text-gray-900 rounded-full p-3 sm:p-3.5 transition-all min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    title="GitHub"
+                  >
+                    <FaGithub className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+                  </Link>
+                )}
+                {sectionItem["_id"] && String(sectionItem["_id"]).trim() !== "" && (
+                  <Link
+                    href={`/projectDescription/${String(sectionItem["_id"])}`}
+                    className="bg-white/20 hover:bg-white/90 hover:text-gray-900 rounded-full p-3 sm:p-3.5 transition-all min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    title="Details"
+                  >
+                    <BsFileText className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+                  </Link>
+                )}
+              </div>
             </div>
-            {/* Text Content */}
-            <div className="text-center pt-4">
+            <div className="p-4 sm:p-5 flex-1 flex flex-col min-w-0 text-center">
               {Object.keys(sectionItem).map((prop, idx) => {
                 if (prop !== "imageURL" && prop !== "_id" && !prop.includes("URL")) {
                   return renderTextByProperty(
