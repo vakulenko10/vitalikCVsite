@@ -103,6 +103,8 @@ const Carousel = (props: CarouselProps) => {
   const arrowClass =
     'flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--section-bg,transparent)] bg-white/25 hover:bg-white/40 active:bg-white/30 backdrop-blur-sm border border-white/30 shadow-md';
 
+  const isNews = sectionName.toLowerCase() === 'somenews';
+
   return (
     <div className="carousel flex flex-col min-h-0 flex-1 box-border overflow-hidden py-4 sm:py-6 md:py-8 relative">
       {/* Subtle decorative blob - adds depth without overlapping content */}
@@ -142,19 +144,37 @@ const Carousel = (props: CarouselProps) => {
               >
                 {sectionData.map((item, itemIndex) => {
                   const itemProps = Object.keys(item);
+                  const slideClasses = isNews
+                    ? 'h-full w-full flex-shrink-0 snap-center flex flex-col items-center justify-center box-border px-4 sm:px-6'
+                    : 'h-full w-full flex-shrink-0 snap-center flex flex-col md:grid md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 items-center md:items-stretch justify-start md:justify-center box-border px-3 sm:px-4 md:px-5';
+
+                  const cardClasses = isNews
+                    ? 'w-full max-w-[320px] sm:max-w-[420px] lg:max-w-[520px] bg-white rounded-xl sm:rounded-2xl border border-white/70 flex flex-col items-center justify-start px-4 py-5 sm:px-6 sm:py-6 gap-3 sm:gap-4 min-h-[360px] sm:min-h-[420px] lg:min-h-[440px]'
+                    : 'h-full w-full min-h-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md border border-white/20 shadow-xl flex flex-col md:grid md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 items-center md:items-stretch justify-center p-4 sm:p-5 md:p-6';
+
                   return (
                     <div
                       key={itemIndex}
-                      className="h-full w-full flex-shrink-0 snap-center flex flex-col md:grid md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 items-center md:items-stretch justify-start md:justify-center box-border px-3 sm:px-4 md:px-5"
+                      className={slideClasses}
                       style={{ minWidth: '100%', maxWidth: '100%' }}
                     >
-                      {/* Card container: glass style, rounded, no overlap with arrows */}
-                      <div className="h-full w-full min-h-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md border border-white/20 shadow-xl flex flex-col md:grid md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 items-center md:items-stretch justify-center p-4 sm:p-5 md:p-6">
-                        <div className="w-full flex-shrink-0 md:min-h-0 overflow-hidden flex justify-center items-center min-h-0">
+                      {/* Card container */}
+                      <div className={cardClasses}>
+                        <div
+                          className={
+                            isNews
+                              ? 'w-full rounded-3xl overflow-hidden bg-black/5 flex-shrink-0 h-[190px] sm:h-[230px] lg:h-[260px]'
+                              : 'w-full flex-shrink-0 md:min-h-0 overflow-hidden flex justify-center items-center min-h-0'
+                          }
+                        >
                           {itemProps.includes('imageURL') && (
                             <img
                               src={String(item['imageURL'])}
-                              className="w-full max-w-[240px] sm:max-w-[280px] md:max-w-full h-auto max-h-[160px] sm:max-h-[200px] md:max-h-[280px] object-contain"
+                              className={
+                                isNews
+                                  ? 'w-full h-full object-cover'
+                                  : 'w-full max-w-[240px] sm:max-w-[280px] md:max-w-full h-auto max-h-[160px] sm:max-h-[200px] md:max-h-[280px] object-contain'
+                              }
                               alt=""
                               draggable={false}
                             />
@@ -165,14 +185,21 @@ const Carousel = (props: CarouselProps) => {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true, margin: '-20px' }}
                           transition={{ duration: 0.3 }}
-                          className="relative flex flex-col gap-2 sm:gap-3 justify-center text-center md:text-left items-center md:items-start text-white min-w-0 w-full overflow-hidden"
+                          className={
+                            isNews
+                              ? 'relative flex flex-col gap-2 sm:gap-2.5 justify-center items-center text-center text-gray-900 min-w-0 w-full'
+                              : 'relative flex flex-col gap-2 sm:gap-3 justify-center text-center md:text-left items-center md:items-start text-white min-w-0 w-full overflow-hidden'
+                          }
                           style={{ zIndex: 10 }}
                         >
                           <div className="w-full min-w-0 overflow-hidden space-y-1.5 sm:space-y-2 text break-words">
                             {itemProps.map((prop, index) => {
                               if (prop !== 'imageURL' && prop !== 'imageDate' && prop !== '_id') {
-                                return (
-                                  renderTextByProperty(prop, String(item[prop] || ''), index, ` ${sectionName}`)
+                                return renderTextByProperty(
+                                  prop,
+                                  String(item[prop] || ''),
+                                  index,
+                                  ` ${sectionName}`
                                 );
                               }
                               return null;
@@ -196,7 +223,7 @@ const Carousel = (props: CarouselProps) => {
           </>
         )}
 
-        {sectionData.length === 1 && (
+        {sectionData.length === 1 && !isNews && (
           <div className="flex-1 min-w-0 overflow-hidden relative">
             <div className="h-full w-full flex px-3 sm:px-4">
               {sectionData.map((item, itemIndex) => {
